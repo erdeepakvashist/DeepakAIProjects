@@ -7,7 +7,7 @@
 <text x="48" y="300" font-size="28">Start 6:00</text>
 <text x="48" y="360" font-size="32" fill="#1f6b43">3 hours 30 minutes</text>
 <text x="48" y="450" font-size="28" fill="#9c4221">Winter break</text>
-<text x="48" y="510" font-size="26">20 December to 31 December = 11 days</text>
-<text x="48" y="560" font-size="26">1 January to 15 January = 15 days</text>
-<text x="48" y="630" font-size="32" fill="#1f6b43">11 + 15 = 26 days</text>
+<text x="48" y="510" font-size="26">December: 31 − 19 = 12 days</text>
+<text x="48" y="560" font-size="26">January: 15 days</text>
+<text x="48" y="630" font-size="32" fill="#1f6b43">12 + 15 = 27 days</text>
 </svg>

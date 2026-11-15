@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">
+<rect width="900" height="640" fill="#f6f1e6"/>
+<text x="48" y="58" font-size="32" fill="#9c4221" font-weight="700">Explain your thinking</text>
+<text x="48" y="130" font-size="26">5 minutes past 8</text>
+<text x="48" y="190" font-size="26">Minute hand on the 1</text>
+<text x="48" y="250" font-size="26">Hour hand just past 8</text>
+<text x="48" y="330" font-size="26" fill="#9c4221">Robert is not correct.</text>
+<text x="48" y="420" font-size="26">Bus: 7:30 a.m. to 10:45 a.m.</text>
+<text x="48" y="490" font-size="32" fill="#1f6b43">3 hours 15 minutes</text>
+<text x="48" y="560" font-size="26">That journey time is correct.</text>
+</svg>

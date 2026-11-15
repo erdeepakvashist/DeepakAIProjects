@@ -344,7 +344,7 @@
 <div class="gate" id="gate">
   <article>
     <h2>Class is ready.</h2>
-    <p>I will teach Chapter 11, Time, through the calendar and duration. The board shows each idea. The book videos and activities play beside the board.</p>
+    <p>I will teach Chapter 11, Time, through the review. The board shows each idea. The book videos and activities play beside the board.</p>
     <p>I will stop for a short question after each idea. At the end there is a test. The pass mark is 8 out of 10, which is 80%. A lower score means a new test, until the mark is high enough.</p>
     <p>Turn the sound on. The lesson is spoken.</p>
     <button class="btn primary" id="start-btn" type="button">Start the lesson</button>
@@ -370,8 +370,7 @@ const LESSON = [
     lines: [
       "Good afternoon. Open Chapter 11, Time.",
       "Shilpa can remember that school prayer starts at 7:57, but she cannot yet read that time on a clock. That is our work today.",
-      "We will read a clock to the exact minute, use a.m. and p.m., change times on the 24-hour clock, and read a calendar.",
-      "Leap years and the timeline come when those pages are here.",
+      "We will read a clock to the exact minute, use the 24-hour clock, read a calendar, find a duration, and learn leap years and a timeline.",
       "At the end there is a test. You need 8 out of 10 to pass."
     ]
   },
@@ -820,7 +819,7 @@ const LESSON = [
       "The circus started at 6:00 p.m. and ended at 9:30 p.m. 9 hours 30 minutes minus 6 hours 00 minutes is 3 hours 30 minutes. Arav's guess of more than 2 hours was right, and the exact duration is 3 hours 30 minutes.",
       "Here is the video for duration.",
       "For days, find the difference between the starting date and the ending date.",
-      "The winter break started on 20 December and ended on 15 January. December has 31 days, so from the 20th to the 31st is 11 days. January then adds 15 days. 11 plus 15 is 26 days."
+      "The winter break started on 20 December and ended on 15 January. Count the starting date too. Days in December are 31 minus 19, which is 12. January adds 15 days. 12 plus 15 is 27 days."
     ],
     media: [{
       afterLine: 2,
@@ -835,9 +834,145 @@ const LESSON = [
       why: "9:30 minus 6:00 is 3 hours and 30 minutes.",
       retry: {
         q: "The difference from 20 December to 15 January is",
-        choices: ["15 days", "20 days", "26 days", "31 days"],
+        choices: ["15 days", "26 days", "27 days", "31 days"],
         answer: 2,
-        why: "31 minus 20 is 11 days left in December. 11 plus 15 days of January is 26 days."
+        why: "Count the 20th as well: 31 minus 19 is 12 days in December. 12 plus 15 days in January is 27 days."
+      }
+    }
+  },
+  {
+    id: "thinking",
+    kicker: "Explain your thinking",
+    title: "Check the hands and the journey",
+    page: "boards-time/18-think.svg",
+    alt: "Robert's clock explanation and the bus journey",
+    lines: [
+      "Robert says that 5 minutes past 8 has the minute hand close to 8 and the hour hand on 5. He is not correct.",
+      "Five minutes past 8 means the minute hand is on the 1. The hour hand has just gone past 8. It is not sitting on 5.",
+      "A bus leaves at 7:30 a.m. and reaches at 10:45 a.m. From 7:30 to 10:30 is 3 hours, and then 15 minutes more. The journey is 3 hours 15 minutes. That statement is correct."
+    ],
+    check: {
+      q: "For 5 minutes past 8, the minute hand is",
+      choices: ["on the 8", "on the 1", "on the 5", "on the 12"],
+      answer: 1,
+      why: "Each number is 5 minutes. The 1 means 5 minutes, so the minute hand is on the 1.",
+      retry: {
+        q: "The bus from 7:30 a.m. to 10:45 a.m. takes",
+        choices: ["2 hours 15 minutes", "3 hours", "3 hours 15 minutes", "4 hours 15 minutes"],
+        answer: 2,
+        why: "10:45 minus 7:30 is 3 hours and 15 minutes."
+      }
+    }
+  },
+  {
+    id: "leap",
+    kicker: "Leap year",
+    title: "The extra day in February",
+    page: "boards-time/19-leap.svg",
+    alt: "Leap year rules and the years to fill in",
+    lines: [
+      "A leap year has 366 days. The extra day is 29 February. An ordinary February has 28 days.",
+      "A year is a leap year when it is divisible by 4. 2016, 2020, and 2024 are leap years.",
+      "A century year, such as 1900 or 2000, is a leap year only when it is also divisible by 400. 1600 and 2000 are leap years. 1800 and 1900 are not.",
+      "The missing years after 2020 are 2024 and 2028, then 2032, then 2036 and 2040.",
+      "In the activity, 1948, 1600, and 2024 are leap years. 2009 and 1800 are not. 1956, 1976, and 3200 are leap years. 2386 and 2010 are not."
+    ],
+    media: [{
+      afterLine: 4,
+      kind: "activity",
+      title: "Activity · identify the leap years",
+      url: activity("cmm4ch11int4")
+    }],
+    check: {
+      q: "In a leap year, February has",
+      choices: ["28 days", "29 days", "30 days", "31 days"],
+      answer: 1,
+      why: "A leap year gives February one extra day, so February has 29 days.",
+      retry: {
+        q: "Which of these is a leap year?",
+        choices: ["1800", "1900", "2000", "2010"],
+        answer: 2,
+        why: "2000 is divisible by 400, so it is a leap year. 1800 and 1900 are century years that are not divisible by 400."
+      }
+    }
+  },
+  {
+    id: "timeline",
+    kicker: "Timeline",
+    title: "Put the events in order",
+    page: "boards-time/20-timeline.svg",
+    alt: "Ria's facts about her father arranged by age",
+    lines: [
+      "A timeline places events in the order in which they happened.",
+      "Ria's father finished school at 18. He went for further studies at 23. He started his first job at 25. He got married at 27.",
+      "The order is 18, then 23, then 25, then 27. School comes first. Marriage comes last."
+    ],
+    check: {
+      q: "Which happened first?",
+      choices: ["He got married", "He started his first job", "He finished school", "He went for further studies"],
+      answer: 2,
+      why: "He finished school at 18, which is the earliest age in the list.",
+      retry: {
+        q: "He started his first job at the age of",
+        choices: ["18", "23", "25", "27"],
+        answer: 2,
+        why: "The first job comes after further studies at 23 and before marriage at 27, so it is at 25."
+      }
+    }
+  },
+  {
+    id: "ex115",
+    kicker: "Exercise 11.5",
+    title: "Find the missing time",
+    page: "boards-time/21-exercise.svg",
+    alt: "Durations, start times, and end times",
+    lines: [
+      "From 3:05 p.m. to 5:00 p.m. is 1 hour 55 minutes. A 45-minute job that ends at 6:45 a.m. started at 6:00 a.m.",
+      "From 7:35 a.m. to 2:15 p.m. is 6 hours 40 minutes. Ten o'clock plus 5 hours is 3:00 p.m.",
+      "Saima read from 11:30 a.m. to 1:15 p.m., so she read for 1 hour 45 minutes. Emma's washing machine starts at 7:00 a.m. and runs for 1 hour, so it stops at 8:00 a.m.",
+      "John's cartoon ended at 9:30 p.m. and lasted 2 hours, so it started at 7:30 p.m. Sarah played from 4:30 p.m. to 6:15 p.m., which is 1 hour 45 minutes.",
+      "Count the starting date as one of the days. Rita starts on 4 July and reads for 25 days, so she finishes on 28 July.",
+      "Rohan's trip runs from 25 May to 10 June. May has 31 days, so 31 minus 24 is 7 days in May, plus 10 days in June. That is 17 days.",
+      "The school trip starts on 9 September and lasts 15 days, so the students return on 23 September. Three weeks is 21 days, so Grandma takes 21 days to knit the sweater."
+    ],
+    check: {
+      q: "From 3:05 p.m. to 5:00 p.m. is",
+      choices: ["1 hour 5 minutes", "1 hour 55 minutes", "2 hours 5 minutes", "2 hours 55 minutes"],
+      answer: 1,
+      why: "From 3:05 to 4:05 is 1 hour, and from 4:05 to 5:00 is 55 minutes.",
+      retry: {
+        q: "A 15-day trip that starts on 9 September ends on",
+        choices: ["15 September", "23 September", "24 September", "30 September"],
+        answer: 1,
+        why: "Count 9 September as day 1. Day 15 is 23 September."
+      }
+    }
+  },
+  {
+    id: "review",
+    kicker: "Chapter review",
+    title: "Check the whole chapter",
+    page: "boards-time/22-review.svg",
+    alt: "Chapter review answers for time, dates, and duration",
+    lines: [
+      "Among the choices, 5 o'clock is 17:00 hours. That is 5 o'clock in the evening. In a leap year, February has 29 days.",
+      "In India, 14 April 2024 is written 14/04/2024. 13:57 hours is 1:57 p.m.",
+      "Work from the 9th to the 23rd of the same month is 15 days, because both dates are counted. 23 minus 8 is 15.",
+      "A ship from 10:00 a.m. to 4:30 p.m. takes 6 hours 30 minutes. A shift that starts at 08:00 hours and lasts 8 hours ends at 16:00 hours, which is 4:00 p.m.",
+      "Peter finishes at 15:45 hours after 7 hours of work, so he started at 08:45 hours, which is 8:45 a.m.",
+      "9:00 p.m. is 21:00 hours. Twenty minutes later it is 9:20 p.m. Ten hours later it is 7:00 a.m.",
+      "05:30 hours is 5:30 a.m. Ten minutes before that is 5:20 a.m. Five hours later it is 10:30 a.m."
+    ],
+    check: {
+      q: "13:57 hours on a 12-hour clock is",
+      choices: ["1:57 a.m.", "1:57 p.m.", "2:57 p.m.", "3:57 p.m."],
+      answer: 1,
+      why: "13 minus 12 is 1, and the time is after noon, so 1:57 p.m.",
+      retry: {
+        q: "Work from the 9th to the 23rd, counting both days, is",
+        choices: ["10 days", "12 days", "14 days", "15 days"],
+        answer: 3,
+        why: "23 minus 8 is 15, because the 9th is counted as one of the days."
       }
     }
   }
@@ -907,8 +1042,23 @@ const BANK = [
   { id: "sun4", topic: "aug4", q: "The fourth Sunday of August 2026 is", choices: ["16 August", "22 August", "23 August", "30 August"], answer: 2, why: "The Sundays are 2, 9, 16, 23, and 30. The fourth is 23 August." },
   { id: "tim", topic: "aug5", q: "Tim's birthday is on", choices: ["15 August", "18 August", "20 August", "22 August"], answer: 1, why: "The calendar marks Tim's birthday on 18 August." },
   { id: "circus", topic: "dur", q: "From 6:00 p.m. to 9:30 p.m. is", choices: ["2 hours 30 minutes", "3 hours", "3 hours 30 minutes", "6 hours 30 minutes"], answer: 2, why: "9:30 minus 6:00 is 3 hours 30 minutes." },
-  { id: "break26", topic: "days", q: "The difference from 20 December to 15 January is", choices: ["11 days", "15 days", "26 days", "35 days"], answer: 2, why: "11 days remain in December after the 20th, and January adds 15 days. 11 plus 15 is 26." },
-  { id: "shelf", topic: "lab", q: "A packet made in January 2025 and expiring in October 2025 lasts", choices: ["6 months", "9 months", "10 months", "12 months"], answer: 1, why: "From January to October is 9 months." }
+  { id: "break27", topic: "days", q: "The winter break from 20 December to 15 January is", choices: ["15 days", "26 days", "27 days", "31 days"], answer: 2, why: "December is 31 minus 19, which is 12 days, because the 20th is counted. 12 plus 15 is 27 days." },
+  { id: "shelf", topic: "lab", q: "A packet made in January 2025 and expiring in October 2025 lasts", choices: ["6 months", "9 months", "10 months", "12 months"], answer: 1, why: "From January to October is 9 months." },
+  { id: "robert", topic: "hands", q: "Five minutes past 8 puts the minute hand on", choices: ["8", "5", "1", "12"], answer: 2, why: "The number 1 means 5 minutes." },
+  { id: "bus", topic: "bus", q: "From 7:30 a.m. to 10:45 a.m. is", choices: ["3 hours", "3 hours 15 minutes", "2 hours 15 minutes", "4 hours"], answer: 1, why: "10:45 minus 7:30 is 3 hours 15 minutes." },
+  { id: "feb29", topic: "leap", q: "In a leap year, February has", choices: ["28 days", "29 days", "30 days", "31 days"], answer: 1, why: "The extra day makes February 29 days long." },
+  { id: "y2000", topic: "leap2", q: "Which year is a leap year?", choices: ["1800", "1900", "2000", "2010"], answer: 2, why: "2000 is divisible by 400, so it is a leap year." },
+  { id: "y2028", topic: "leap3", q: "The leap year after 2024 is", choices: ["2025", "2026", "2028", "2030"], answer: 2, why: "Leap years usually come every 4 years. 2024 plus 4 is 2028." },
+  { id: "order", topic: "line", q: "Ria's father finished school at", choices: ["18", "23", "25", "27"], answer: 0, why: "School is the earliest event, at the age of 18." },
+  { id: "job", topic: "line2", q: "He started his first job at", choices: ["18", "23", "25", "27"], answer: 2, why: "The first job is at 25, after further studies and before marriage." },
+  { id: "gap155", topic: "ex5", q: "From 3:05 p.m. to 5:00 p.m. is", choices: ["1 hour 55 minutes", "2 hours", "55 minutes", "3 hours 5 minutes"], answer: 0, why: "From 3:05 to 5:00 is 1 hour and 55 minutes." },
+  { id: "wash", topic: "ex5b", q: "A machine starts at 7:00 a.m. and runs for 1 hour. It stops at", choices: ["6:00 a.m.", "7:30 a.m.", "8:00 a.m.", "8:00 p.m."], answer: 2, why: "7:00 plus 1 hour is 8:00 a.m." },
+  { id: "trip", topic: "ex5c", q: "A trip from 25 May to 10 June lasts", choices: ["10 days", "15 days", "16 days", "17 days"], answer: 3, why: "May contributes 7 days, from the 25th through the 31st, and June adds 10 days." },
+  { id: "weeks", topic: "ex5d", q: "3 weeks is", choices: ["14 days", "20 days", "21 days", "30 days"], answer: 2, why: "One week is 7 days. 3 times 7 is 21 days." },
+  { id: "ship", topic: "rev", q: "A ship from 10:00 a.m. to 4:30 p.m. takes", choices: ["4 hours 30 minutes", "6 hours", "6 hours 30 minutes", "7 hours"], answer: 2, why: "From 10:00 a.m. to 4:00 p.m. is 6 hours, plus 30 minutes." },
+  { id: "shift", topic: "rev2", q: "A shift starts at 08:00 hours and lasts 8 hours. It ends at", choices: ["12:00 hours", "14:00 hours", "16:00 hours", "18:00 hours"], answer: 2, why: "08:00 plus 8 hours is 16:00 hours, which is 4:00 p.m." },
+  { id: "nine", topic: "rev3", q: "9:00 p.m. on a 24-hour clock is", choices: ["09:00", "19:00", "21:00", "23:00"], answer: 2, why: "9 plus 12 is 21, so 9:00 p.m. is 21:00 hours." },
+  { id: "worked", topic: "rev4", q: "Work from the 9th to the 23rd, counting both days, is", choices: ["12 days", "14 days", "15 days", "23 days"], answer: 2, why: "23 minus 8 is 15 days." }
 ];
 
 const stepsEl = document.getElementById("steps");

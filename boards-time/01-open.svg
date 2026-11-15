@@ -8,10 +8,10 @@
 <text x="48" y="250" font-size="26">1  Read a clock to the exact minute</text>
 <text x="48" y="300" font-size="26">2  Say times as past and to</text>
 <text x="48" y="350" font-size="26">3  Use a.m. and p.m.</text>
-<text x="48" y="400" font-size="26">4  Read a calendar and find a duration</text>
+<text x="48" y="400" font-size="26">4  Calendar, duration, leap year, timeline</text>
 <rect x="48" y="440" width="804" height="220" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
-<text x="72" y="500" font-size="26" fill="#5c5146">Still to come, when those pages arrive</text>
-<text x="72" y="580" font-size="26">Leap year and timeline.</text>
+<text x="72" y="530" font-size="26" fill="#5c5146">Then the chapter review.</text>
+<text x="72" y="590" font-size="26">Pass mark stays 8 out of 10.</text>
 <text x="48" y="740" font-size="28" fill="#1f6b43" font-weight="700">Pass mark: 8 out of 10</text>
 
 </svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" font-family="Georgia, serif">
+<rect width="900" height="500" fill="#f6f1e6"/>
+<text x="48" y="58" font-size="32" fill="#9c4221" font-weight="700">Timeline</text>
+<text x="48" y="120" font-size="26">Put the events in the order they happened.</text>
+<text x="48" y="200" font-size="28">1  Finished school at 18</text>
+<text x="48" y="270" font-size="28">2  Further studies at 23</text>
+<text x="48" y="340" font-size="28">3  First job at 25</text>
+<text x="48" y="410" font-size="28">4  Married at 27</text>
+</svg>

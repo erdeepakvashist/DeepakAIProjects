@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="Georgia, serif">
+<rect width="900" height="620" fill="#f6f1e6"/>
+<text x="48" y="58" font-size="32" fill="#9c4221" font-weight="700">Leap year</text>
+<text x="48" y="120" font-size="26">366 days. February has 29 days.</text>
+<text x="48" y="190" font-size="26">A leap year is divisible by 4.</text>
+<text x="48" y="250" font-size="26">A century year must also be divisible by 400.</text>
+<text x="48" y="330" font-size="26">2016, 2020, 2024 are leap years.</text>
+<text x="48" y="390" font-size="26">2000 is a leap year. 1800 and 1900 are not.</text>
+<text x="48" y="480" font-size="28">2020, 2024, 2028, 2032,</text>
+<text x="48" y="530" font-size="28">2036, 2040</text>
+</svg>
