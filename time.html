@@ -344,7 +344,7 @@
 <div class="gate" id="gate">
   <article>
     <h2>Class is ready.</h2>
-    <p>I will teach Chapter 11, Time, through the 24-hour clock. The board shows each idea. The book videos and activities play beside the board.</p>
+    <p>I will teach Chapter 11, Time, through the calendar and duration. The board shows each idea. The book videos and activities play beside the board.</p>
     <p>I will stop for a short question after each idea. At the end there is a test. The pass mark is 8 out of 10, which is 80%. A lower score means a new test, until the mark is high enough.</p>
     <p>Turn the sound on. The lesson is spoken.</p>
     <button class="btn primary" id="start-btn" type="button">Start the lesson</button>
@@ -370,8 +370,8 @@ const LESSON = [
     lines: [
       "Good afternoon. Open Chapter 11, Time.",
       "Shilpa can remember that school prayer starts at 7:57, but she cannot yet read that time on a clock. That is our work today.",
-      "We will read a clock to the exact minute, say a time as minutes past or minutes to, decide a.m. or p.m., and change a time into the 24-hour clock.",
-      "The calendar, dates, leap years, and the timeline come when those pages are here.",
+      "We will read a clock to the exact minute, use a.m. and p.m., change times on the 24-hour clock, and read a calendar.",
+      "Leap years and the timeline come when those pages are here.",
       "At the end there is a test. You need 8 out of 10 to pass."
     ]
   },
@@ -667,6 +667,179 @@ const LESSON = [
         why: "2 plus 12 is 14, so 2:00 p.m. is 14:00 hours."
       }
     }
+  },
+  {
+    id: "ex113",
+    kicker: "Exercise 11.3",
+    title: "Match the same time",
+    page: "boards-time/12-match.svg",
+    alt: "Matching 24-hour times with 12-hour times",
+    lines: [
+      "Exercise 11.3. Colour the boxes that show the same time.",
+      "14:00 hours is 2:00 p.m. 07:45 hours is 7:45 a.m. 23:00 hours is 11:00 p.m. 08:00 hours is 8:00 a.m.",
+      "Now change these times. 1:40 a.m. is 01:40 hours. 3:37 a.m. is 03:37 hours.",
+      "18:50 hours is after noon. 18 minus 12 is 6, so it is 6:50 p.m. 16:25 hours is 4:25 p.m., because 16 minus 12 is 4.",
+      "5:45 p.m. adds 12 to the hour. 5 plus 12 is 17, so it is 17:45 hours.",
+      "00:00 hours is 12 midnight.",
+      "The activity asks you to change 24-hour times back to the 12-hour clock. 17:40 hours is 5:40 p.m. 08:10 hours is 8:10 a.m. 21:30 hours is 9:30 p.m. 10:14 hours is 10:14 a.m. 23:20 hours is 11:20 p.m."
+    ],
+    media: [{
+      afterLine: 6,
+      kind: "activity",
+      title: "Activity · change to the 12-hour clock",
+      url: activity("cmm4ch11int3")
+    }],
+    check: {
+      q: "23:00 hours is the same as",
+      choices: ["11:00 a.m.", "11:00 p.m.", "1:00 p.m.", "10:00 p.m."],
+      answer: 1,
+      why: "23 is more than 12. 23 minus 12 is 11, and it is after noon, so 11:00 p.m.",
+      retry: {
+        q: "16:25 hours is the same as",
+        choices: ["4:25 a.m.", "4:25 p.m.", "6:25 p.m.", "16:25 p.m."],
+        answer: 1,
+        why: "16 minus 12 is 4, so 16:25 hours is 4:25 p.m."
+      }
+    }
+  },
+  {
+    id: "table113",
+    kicker: "Exercise 11.3",
+    title: "Complete each time",
+    page: "boards-time/13-table.svg",
+    alt: "Times written in words, 24-hour time, and 12-hour time",
+    lines: [
+      "The table gives one part of a time and leaves the rest blank. Complete each given time on its own.",
+      "17:00 hours is after noon. 17 minus 12 is 5, so it is 5:00 p.m., or 5 o'clock in the evening.",
+      "6 o'clock in the morning is 6:00 a.m. On the 24-hour clock it is 06:00 hours.",
+      "11:00 a.m. is 11 o'clock in the morning. On the 24-hour clock it is 11:00 hours.",
+      "9 o'clock in the morning is 9:00 a.m., which is 09:00 hours.",
+      "3:20 a.m. is 3:20 in the morning, which is 03:20 hours."
+    ],
+    check: {
+      q: "17:00 hours is",
+      choices: ["7:00 a.m.", "5:00 p.m.", "7:00 p.m.", "5:00 a.m."],
+      answer: 1,
+      why: "17 minus 12 is 5, and the time is after noon, so 5:00 p.m.",
+      retry: {
+        q: "6 o'clock in the morning is",
+        choices: ["18:00 hours", "06:00 hours", "6:00 p.m.", "16:00 hours"],
+        answer: 1,
+        why: "Six in the morning is before noon, so it is 06:00 hours."
+      }
+    }
+  },
+  {
+    id: "calendar",
+    kicker: "Calendar",
+    title: "September 2026",
+    page: "boards-time/14-september.svg",
+    alt: "Marked dates on the September 2026 calendar",
+    lines: [
+      "A calendar shows the months, days, and dates of the year. We use it to plan days, weeks, and months, and to remember important dates.",
+      "This calendar is September 2026. September has 30 days. The 1st is a Tuesday.",
+      "Arvind's birthday is on 1 September, a Tuesday.",
+      "Science chapter 1 is marked on 3 September, a Thursday. Maths chapter 3 is on 5 September, a Saturday. English is on 8 September, a Tuesday.",
+      "The parents' anniversary is on 14 September, a Monday."
+    ],
+    check: {
+      q: "Arvind's birthday on this calendar is",
+      choices: ["1 September, Tuesday", "3 September, Thursday", "8 September, Tuesday", "14 September, Monday"],
+      answer: 0,
+      why: "The September calendar marks Arvind's birthday on the 1st, and the 1st is a Tuesday.",
+      retry: {
+        q: "The parents' anniversary is on",
+        choices: ["5 September", "8 September", "14 September", "30 September"],
+        answer: 2,
+        why: "The calendar marks the parents' anniversary on 14 September."
+      }
+    }
+  },
+  {
+    id: "dates",
+    kicker: "Writing dates",
+    title: "Day, month, and year",
+    page: "boards-time/15-dates.svg",
+    alt: "Dates written in words and in numbers",
+    lines: [
+      "A date tells us when something happened, is happening, or will happen. It has a day, a month, and a year.",
+      "We can write 15th August 2025 in words. In India we usually write the day, then the month, then the year. That is DD/MM/YYYY, so the same date is 15/08/2025.",
+      "In the United States the month comes first. The same date is 08/15/2025.",
+      "15/08/2024 is 15 August 2024. It is not 8 August. 18/04/2024 is 18 April 2024. It is not 4 April.",
+      "25 January 2025 is 25/01/2025. 25 December 2023 is 25/12/2023.",
+      "On a packet, MFD means the month it was made and EXP means the month it expires. From January 2025 to October 2025 is 9 months. June 2025 comes before October 2025, so that packet is still safe in June."
+    ],
+    check: {
+      q: "In India, 15 August 2025 is written as",
+      choices: ["08/15/2025", "15/08/2025", "2025/08/15", "15/2025/08"],
+      answer: 1,
+      why: "In India the day comes first, then the month, then the year: 15/08/2025.",
+      retry: {
+        q: "15/08/2024 is the same as 8 August 2024.",
+        choices: ["True", "False"],
+        answer: 1,
+        why: "15/08/2024 means 15 August 2024. The day is 15, not 8."
+      }
+    }
+  },
+  {
+    id: "august",
+    kicker: "Exercise 11.4",
+    title: "August 2026",
+    page: "boards-time/16-august.svg",
+    alt: "Marked dates on the August 2026 calendar",
+    lines: [
+      "Look at the August 2026 calendar. The 1st is a Saturday.",
+      "Sports day is on 1 August, a Saturday.",
+      "Independence Day is on 15 August. In 2026 that is a Saturday.",
+      "Tim's birthday is on 18 August, a Tuesday. The PTM is on 20 August, a Thursday.",
+      "The Saturdays are 1, 8, 15, 22, and 29. The fourth Saturday is 22 August.",
+      "The Sundays are 2, 9, 16, 23, and 30. The fourth Sunday is 23 August."
+    ],
+    check: {
+      q: "The fourth Saturday of August 2026 is",
+      choices: ["8 August", "15 August", "22 August", "29 August"],
+      answer: 2,
+      why: "The Saturdays are 1, 8, 15, 22, and 29. The fourth is 22 August.",
+      retry: {
+        q: "The PTM is on",
+        choices: ["15 August", "18 August", "20 August", "23 August"],
+        answer: 2,
+        why: "The calendar marks the PTM on 20 August."
+      }
+    }
+  },
+  {
+    id: "duration",
+    kicker: "Duration",
+    title: "How long did it last?",
+    page: "boards-time/17-duration.svg",
+    alt: "Circus time subtraction and the winter-break day count",
+    lines: [
+      "Duration means how long an event continues. Subtract the start time from the end time.",
+      "The circus started at 6:00 p.m. and ended at 9:30 p.m. 9 hours 30 minutes minus 6 hours 00 minutes is 3 hours 30 minutes. Arav's guess of more than 2 hours was right, and the exact duration is 3 hours 30 minutes.",
+      "Here is the video for duration.",
+      "For days, find the difference between the starting date and the ending date.",
+      "The winter break started on 20 December and ended on 15 January. December has 31 days, so from the 20th to the 31st is 11 days. January then adds 15 days. 11 plus 15 is 26 days."
+    ],
+    media: [{
+      afterLine: 2,
+      kind: "video",
+      title: "Video · duration of time",
+      url: video("cmm4ch11ivid1")
+    }],
+    check: {
+      q: "A show from 6:00 p.m. to 9:30 p.m. lasts",
+      choices: ["2 hours", "3 hours", "3 hours 30 minutes", "9 hours 30 minutes"],
+      answer: 2,
+      why: "9:30 minus 6:00 is 3 hours and 30 minutes.",
+      retry: {
+        q: "The difference from 20 December to 15 January is",
+        choices: ["15 days", "20 days", "26 days", "31 days"],
+        answer: 2,
+        why: "31 minus 20 is 11 days left in December. 11 plus 15 days of January is 26 days."
+      }
+    }
   }
 ];
 
@@ -712,7 +885,30 @@ const BANK = [
   { id: "h1400", topic: "rule3", q: "2:00 p.m. in 24-hour time is", choices: ["02:00", "14:00", "12:00", "22:00"], answer: 1, why: "2 plus 12 is 14, so 2:00 p.m. is 14:00 hours." },
   { id: "h2200", topic: "rule4", q: "10:00 p.m. in 24-hour time is", choices: ["10:00", "12:00", "20:00", "22:00"], answer: 3, why: "10 plus 12 is 22, so 10:00 p.m. is 22:00 hours." },
   { id: "noon24", topic: "noon24", q: "12:00 hours is", choices: ["12 midnight", "12 noon", "12:00 a.m.", "00:00"], answer: 1, why: "12:00 hours is the middle of the day, 12 noon." },
-  { id: "mid24", topic: "mid24", q: "00:00 hours is", choices: ["12 noon", "12 midnight", "12:00 p.m.", "1:00 a.m."], answer: 1, why: "00:00 hours is the start of the day, 12 midnight." }
+  { id: "mid24", topic: "mid24", q: "00:00 hours is", choices: ["12 noon", "12 midnight", "12:00 p.m.", "1:00 a.m."], answer: 1, why: "00:00 hours is the start of the day, 12 midnight." },
+  { id: "m1400", topic: "match", q: "14:00 hours matches", choices: ["2:00 a.m.", "2:00 p.m.", "4:00 p.m.", "12:00 noon"], answer: 1, why: "14 minus 12 is 2, so 14:00 hours is 2:00 p.m." },
+  { id: "m0745", topic: "match2", q: "07:45 hours matches", choices: ["7:45 p.m.", "7:45 a.m.", "8:45 a.m.", "5:45 a.m."], answer: 1, why: "07 is before 12, so 07:45 hours is 7:45 a.m." },
+  { id: "m2300", topic: "match3", q: "23:00 hours matches", choices: ["11:00 a.m.", "1:00 a.m.", "11:00 p.m.", "10:00 p.m."], answer: 2, why: "23 minus 12 is 11, so 23:00 hours is 11:00 p.m." },
+  { id: "c1850", topic: "conv", q: "18:50 hours is", choices: ["6:50 a.m.", "6:50 p.m.", "8:50 p.m.", "18:50 p.m."], answer: 1, why: "18 minus 12 is 6, so 18:50 hours is 6:50 p.m." },
+  { id: "c1745", topic: "conv2", q: "5:45 p.m. in 24-hour time is", choices: ["05:45", "15:45", "17:45", "19:45"], answer: 2, why: "5 plus 12 is 17, so 5:45 p.m. is 17:45 hours." },
+  { id: "c0140", topic: "conv3", q: "1:40 a.m. in 24-hour time is", choices: ["13:40", "01:40", "00:40", "11:40"], answer: 1, why: "1:40 in the morning stays 1 and is written 01:40 hours." },
+  { id: "c1700", topic: "table", q: "17:00 hours in words is", choices: ["7 o'clock in the morning", "5 o'clock in the evening", "7 o'clock in the evening", "5 o'clock in the morning"], answer: 1, why: "17 minus 12 is 5, so 17:00 hours is 5 o'clock in the evening." },
+  { id: "c0600", topic: "table2", q: "6 o'clock in the morning is", choices: ["06:00 hours", "18:00 hours", "6:00 p.m.", "16:00 hours"], answer: 0, why: "Morning time before noon is 06:00 hours." },
+  { id: "c1120", topic: "back12", q: "23:20 hours is", choices: ["11:20 a.m.", "11:20 p.m.", "1:20 p.m.", "10:20 p.m."], answer: 1, why: "23 minus 12 is 11, so 23:20 hours is 11:20 p.m." },
+  { id: "bday", topic: "sept", q: "On the September 2026 calendar, Arvind's birthday is", choices: ["1 September", "3 September", "8 September", "14 September"], answer: 0, why: "The calendar marks Arvind's birthday on 1 September." },
+  { id: "anniv", topic: "sept2", q: "The parents' anniversary is marked on", choices: ["5 September", "8 September", "14 September", "30 September"], answer: 2, why: "14 September is marked as the parents' anniversary." },
+  { id: "india", topic: "date", q: "15 August 2025 in India's number form is", choices: ["08/15/2025", "15/08/2025", "15/8/15", "08/2025/15"], answer: 1, why: "India writes the day, then the month, then the year: 15/08/2025." },
+  { id: "usa", topic: "date2", q: "The same 15 August 2025 in the United States number form is", choices: ["15/08/2025", "08/15/2025", "2025/15/08", "08/2025/15"], answer: 1, why: "The United States writes the month first: 08/15/2025." },
+  { id: "false18", topic: "tf", q: "18/04/2024 is the same as 4 April 2024.", choices: ["True", "False"], answer: 1, why: "18/04/2024 is 18 April 2024." },
+  { id: "true25", topic: "tf2", q: "25 December 2023 is the same as 25/12/2023.", choices: ["True", "False"], answer: 0, why: "25 is the day and 12 is December, so 25/12/2023 is 25 December 2023." },
+  { id: "sports", topic: "aug", q: "Sports day on the August calendar is", choices: ["1 August", "15 August", "18 August", "20 August"], answer: 0, why: "Sports day is marked on 1 August." },
+  { id: "indep", topic: "aug2", q: "In August 2026, Independence Day falls on a", choices: ["Friday", "Saturday", "Sunday", "Monday"], answer: 1, why: "15 August 2026 is a Saturday." },
+  { id: "sat4", topic: "aug3", q: "The fourth Saturday of August 2026 is", choices: ["15 August", "22 August", "23 August", "29 August"], answer: 1, why: "The Saturdays are 1, 8, 15, 22, and 29. The fourth is 22 August." },
+  { id: "sun4", topic: "aug4", q: "The fourth Sunday of August 2026 is", choices: ["16 August", "22 August", "23 August", "30 August"], answer: 2, why: "The Sundays are 2, 9, 16, 23, and 30. The fourth is 23 August." },
+  { id: "tim", topic: "aug5", q: "Tim's birthday is on", choices: ["15 August", "18 August", "20 August", "22 August"], answer: 1, why: "The calendar marks Tim's birthday on 18 August." },
+  { id: "circus", topic: "dur", q: "From 6:00 p.m. to 9:30 p.m. is", choices: ["2 hours 30 minutes", "3 hours", "3 hours 30 minutes", "6 hours 30 minutes"], answer: 2, why: "9:30 minus 6:00 is 3 hours 30 minutes." },
+  { id: "break26", topic: "days", q: "The difference from 20 December to 15 January is", choices: ["11 days", "15 days", "26 days", "35 days"], answer: 2, why: "11 days remain in December after the 20th, and January adds 15 days. 11 plus 15 is 26." },
+  { id: "shelf", topic: "lab", q: "A packet made in January 2025 and expiring in October 2025 lasts", choices: ["6 months", "9 months", "10 months", "12 months"], answer: 1, why: "From January to October is 9 months." }
 ];
 
 const stepsEl = document.getElementById("steps");

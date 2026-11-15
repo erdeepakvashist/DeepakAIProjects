@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 740" font-family="Georgia, serif">
+<rect width="900" height="740" fill="#f6f1e6"/>
+<text x="48" y="58" font-size="32" fill="#9c4221" font-weight="700">Exercise 11.3 · Same time</text>
+<text x="48" y="120" font-size="26">14:00 hours = 2:00 p.m.</text>
+<text x="48" y="170" font-size="26">07:45 hours = 7:45 a.m.</text>
+<text x="48" y="220" font-size="26">23:00 hours = 11:00 p.m.</text>
+<text x="48" y="270" font-size="26">08:00 hours = 8:00 a.m.</text>
+<text x="48" y="350" font-size="28" fill="#9c4221">Change the clock</text>
+<text x="48" y="410" font-size="26">1:40 a.m. = 01:40 hours</text>
+<text x="48" y="460" font-size="26">18:50 hours = 6:50 p.m.</text>
+<text x="48" y="510" font-size="26">5:45 p.m. = 17:45 hours</text>
+<text x="48" y="560" font-size="26">00:00 hours = 12 midnight</text>
+<text x="48" y="610" font-size="26">3:37 a.m. = 03:37 hours</text>
+<text x="48" y="660" font-size="26">16:25 hours = 4:25 p.m.</text>
+</svg>

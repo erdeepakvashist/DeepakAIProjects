@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="Georgia, serif">
+<rect width="900" height="720" fill="#f6f1e6"/>
+<text x="48" y="58" font-size="32" fill="#9c4221" font-weight="700">Duration</text>
+<text x="48" y="120" font-size="26">Duration is how long an event continues.</text>
+<text x="48" y="180" font-size="26">Subtract the start time from the end time.</text>
+<text x="48" y="250" font-size="28">End 9:30</text>
+<text x="48" y="300" font-size="28">Start 6:00</text>
+<text x="48" y="360" font-size="32" fill="#1f6b43">3 hours 30 minutes</text>
+<text x="48" y="450" font-size="28" fill="#9c4221">Winter break</text>
+<text x="48" y="510" font-size="26">20 December to 31 December = 11 days</text>
+<text x="48" y="560" font-size="26">1 January to 15 January = 15 days</text>
+<text x="48" y="630" font-size="32" fill="#1f6b43">11 + 15 = 26 days</text>
+</svg>
