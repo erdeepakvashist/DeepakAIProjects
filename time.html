@@ -1202,9 +1202,10 @@ function button(label, cls, fn) {
 
 function pickVoice() {
   const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-  return voices.find(v => v.lang === "en-IN")
-    || voices.find(v => /en-GB/i.test(v.lang) && /female|google|natural/i.test(v.name))
-    || voices.find(v => v.lang && v.lang.startsWith("en"))
+  const indian = v => /en[-_]IN/i.test(v.lang || "") || /india|indian|heera|neerja|swara|ravi|aditi|veena/i.test(v.name || "");
+  const list = voices.filter(indian);
+  return list.find(v => /female|heera|neerja|swara|aditi|veena/i.test(v.name || ""))
+    || list[0]
     || null;
 }
 
@@ -1220,7 +1221,7 @@ function speak(text) {
     };
     speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.rate = 0.92;
+    u.rate = 0.8;
     u.lang = "en-IN";
     const voice = pickVoice();
     if (voice) u.voice = voice;
@@ -1228,7 +1229,7 @@ function speak(text) {
     u.onerror = finish;
     speechSynthesis.resume();
     speechSynthesis.speak(u);
-    setTimeout(finish, Math.min(28000, 1800 + text.length * 85));
+    setTimeout(finish, Math.min(60000, 2500 + text.length * 115));
   });
 }
 
