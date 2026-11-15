@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="700" fill="#f6f1e6"/>
+
+<text x="48" y="64" font-size="34" fill="#9c4221" font-weight="700">Which part of the day?</text>
+<rect x="48" y="120" width="380" height="250" rx="14" fill="#e7f0fa" stroke="#b7cbe0"/>
+<text x="72" y="180" font-size="28" fill="#245f86" font-weight="700">a.m.</text>
+<text x="72" y="240" font-size="26">Getting ready for school</text>
+<text x="72" y="300" font-size="26">Breakfast at 7:30</text>
+<rect x="470" y="120" width="380" height="360" rx="14" fill="#f8efe4" stroke="#e2d0b8"/>
+<text x="494" y="180" font-size="28" fill="#9c4221" font-weight="700">p.m.</text>
+<text x="494" y="240" font-size="26">Swimming in the evening</text>
+<text x="494" y="300" font-size="26">Cycling after school</text>
+<text x="494" y="360" font-size="26">Homework after school</text>
+<text x="494" y="420" font-size="26">Ice cream after dinner</text>
+<text x="48" y="560" font-size="26">A day has 24 hours. The 12-hour clock</text>
+<text x="48" y="610" font-size="26">goes around twice.</text>
+
+</svg>

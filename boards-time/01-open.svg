@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 820" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="820" fill="#f6f1e6"/>
+
+<rect x="48" y="36" width="804" height="110" rx="16" fill="#9c4221"/>
+<text x="72" y="82" font-size="22" fill="#f6e2d6">Chapter 11</text>
+<text x="72" y="124" font-size="46" fill="#fff8f3" font-weight="700">Time</text>
+<text x="48" y="200" font-size="28" fill="#241c14">This part of the chapter</text>
+<text x="48" y="260" font-size="28">1  Read a clock to the exact minute</text>
+<text x="48" y="320" font-size="28">2  Say times as past and to</text>
+<text x="48" y="380" font-size="28">3  Use a.m. and p.m.</text>
+<rect x="48" y="440" width="804" height="220" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="500" font-size="26" fill="#5c5146">Still to come, when those pages arrive</text>
+<text x="72" y="560" font-size="26">24-hour clock, calendar, dates,</text>
+<text x="72" y="610" font-size="26">duration, leap year, and timeline.</text>
+<text x="48" y="740" font-size="28" fill="#1f6b43" font-weight="700">Pass mark: 8 out of 10</text>
+
+</svg>

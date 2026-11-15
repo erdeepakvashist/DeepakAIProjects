@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6 · Fractions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Source+Sans+3:wght@400;560;680&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #241c14;
+    --ink-soft: #5c5146;
+    --paper: #f6f1e7;
+    --board: #efe4d2;
+    --frame: #6e5132;
+    --room: #1e1914;
+    --rail: #2a241c;
+    --line: #e2d5c3;
+    --accent: #9c4221;
+    --accent-ink: #fff8f3;
+    --good: #1f6b43;
+    --good-bg: #e5f3ea;
+    --bad: #8d3428;
+    --bad-bg: #f8e8e4;
+    --mark: #c9842a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--room);
+    height: 100%;
+  }
+  button, input { font: inherit; }
+  button { cursor: pointer; }
+  .room {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr) 380px;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  header.top {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    color: #f3eadf;
+    border-bottom: 1px solid #3a3128;
+  }
+  header.top h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 20px;
+    font-weight: 640;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  header.top p { margin: 0; color: #cbbba8; font-size: 14px; }
+  .grow { flex: 1; }
+  .mark-pill {
+    border: 1px solid #6b5340;
+    color: #f0d7b4;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+  nav.steps {
+    background: var(--rail);
+    color: #efe6da;
+    overflow: auto;
+    padding: 10px;
+    border-right: 1px solid #3a3128;
+  }
+  nav.steps button.step {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: #e7dccf;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+  }
+  nav.steps button.step small {
+    display: block;
+    color: #b5a594;
+    font-size: 12px;
+  }
+  nav.steps button.step.on {
+    background: #3d3228;
+    color: white;
+  }
+  nav.steps button.step.done small { color: #d7b48a; }
+  .stage {
+    min-width: 0;
+    min-height: 0;
+    padding: 14px;
+    display: flex;
+  }
+  .board {
+    flex: 1;
+    min-width: 0;
+    background: var(--frame);
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .board-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #f3e6d4;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .board-face {
+    flex: 1;
+    min-height: 0;
+    background: var(--board);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+  .board-face.split { grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr); }
+  .page-wrap, .media-wrap {
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+    background: #e7dccb;
+  }
+  .page-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #e7dccb;
+  }
+  .media-wrap {
+    display: flex;
+    flex-direction: column;
+    background: #16130f;
+    border-left: 3px solid var(--frame);
+  }
+  .media-wrap header {
+    color: #f6efe4;
+    padding: 8px 10px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+  }
+  .media-wrap header a { color: #f0d7b4; }
+  .media-wrap iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: black;
+    min-height: 220px;
+  }
+  aside.teacher {
+    background: var(--paper);
+    border-left: 1px solid #3a3128;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .teacher-head {
+    padding: 14px 16px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .teacher-head span {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 680;
+  }
+  .teacher-head strong {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 22px;
+    font-weight: 640;
+  }
+  .said {
+    margin: 14px 16px;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 520;
+  }
+  .controls, .check, .test {
+    margin: 0 16px 16px;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  button.btn {
+    background: white;
+    border: 1px solid #d9cbb8;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--ink);
+  }
+  button.btn.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  button.btn:disabled { opacity: 0.45; cursor: default; }
+  .check h3, .test h3 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choices button {
+    text-align: left;
+    background: white;
+    border: 1px solid #d9cbb8;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .choices button.good { background: var(--good-bg); border-color: var(--good); }
+  .choices button.bad { background: var(--bad-bg); border-color: var(--bad); }
+  .note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    line-height: 1.4;
+  }
+  .note.good { background: var(--good-bg); border-color: #b7dcc6; }
+  .note.bad { background: var(--bad-bg); border-color: #efc7c0; }
+  .test .q {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .test .q p { margin: 0 0 8px; font-weight: 680; }
+  .test label {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    align-items: flex-start;
+  }
+  .scoreline {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 28px;
+    margin: 0 0 6px;
+  }
+  .history { font-size: 14px; color: var(--ink-soft); margin: 8px 0; }
+  .history div { padding: 2px 0; }
+  .gate {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 12, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 5;
+  }
+  .gate article {
+    background: var(--paper);
+    max-width: 520px;
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+  }
+  .gate h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 32px;
+    margin: 0 0 8px;
+  }
+  .gate p { margin: 0 0 10px; line-height: 1.45; color: var(--ink-soft); }
+  .hidden { display: none !important; }
+  @media (max-width: 980px) {
+    .room {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto minmax(320px, 52vh) auto;
+      height: auto;
+      min-height: 100%;
+    }
+    nav.steps { display: flex; gap: 6px; overflow: auto; border-right: 0; }
+    nav.steps button.step { width: auto; min-width: 160px; }
+    .board-face.split { grid-template-columns: 1fr; }
+    .media-wrap { border-left: 0; border-top: 3px solid var(--frame); min-height: 280px; }
+    aside.teacher { border-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="room">
+  <header class="top">
+    <div>
+      <h1>Chapter 6 · Fractions</h1>
+      <p>Class lesson from the textbook pages. The board shows the idea being taught.</p>
+    </div>
+    <div class="grow"></div>
+    <a href="index.html" style="color:#f0d7b4;text-decoration:none">All chapters</a>
+    <div class="mark-pill" id="attempt-pill">Pass mark 80%</div>
+  </header>
+  <nav class="steps" id="steps"></nav>
+  <main class="stage">
+    <section class="board" aria-label="Classroom board">
+      <div class="board-label">
+        <span id="board-kicker">Board</span>
+        <span id="board-page"></span>
+      </div>
+      <div class="board-face" id="board-face">
+        <div class="page-wrap">
+          <img id="page" alt="Lesson board">
+        </div>
+        <div class="media-wrap hidden" id="media">
+          <header>
+            <span id="media-title">Video</span>
+            <a id="media-open" href="#" target="_blank" rel="noopener">Open in a new tab</a>
+          </header>
+          <iframe id="media-frame" title="Textbook video or activity" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+  <aside class="teacher" aria-label="Teacher">
+    <div class="teacher-head">
+      <span id="mode-label">Teacher</span>
+      <strong id="step-title">Fractions</strong>
+    </div>
+    <div class="said" id="said"></div>
+    <div class="controls" id="controls"></div>
+    <div class="check hidden" id="check"></div>
+    <div class="test hidden" id="test"></div>
+  </aside>
+</div>
+<div class="gate" id="gate">
+  <article>
+    <h2>Class is ready.</h2>
+    <p>I will teach Chapter 6 from the pages in your photographs. The board shows the page we are on. When the book has a video or an activity QR code, it plays on the board next to that page.</p>
+    <p>I will stop for a short question after each idea. At the end there is a test. The pass mark is 8 out of 10, which is 80%. A lower score means a new test, until the mark is high enough.</p>
+    <p>Turn the sound on. The lesson is spoken.</p>
+    <button class="btn primary" id="start-btn" type="button">Start the lesson</button>
+  </article>
+</div>
+<script>
+const PLAYER = "https://qrassets.s3.ap-south-1.amazonaws.com/videoplayertemplate/index.html?videofile=";
+const ASSET = "https://qrassets.s3.ap-south-1.amazonaws.com/CMM/CMM4/Chapter6/";
+function video(id) {
+  return PLAYER + ASSET + id + "/master.m3u8";
+}
+function activity(id) {
+  return ASSET + id + "/index.html";
+}
+
+const LESSON = [
+  {
+    id: "open",
+    kicker: "Page 74",
+    title: "Opening the chapter",
+    page: "boards/01-open.svg",
+    alt: "Chapter 6 Fractions opening page with the warm-up and learning objectives",
+    lines: [
+      "Good afternoon. Open Chapter 6, Fractions. Keep your eyes on the board. That is the chapter page.",
+      "A fraction is a number for equal parts of one whole. One slice of a pizza, or one piece of a fruit, is a fraction of the whole.",
+      "Today we will name the types of fractions, change improper fractions into mixed numbers, reduce a fraction to its simplest form, compare like fractions and unit fractions, and add and subtract like fractions.",
+      "We will also solve word problems, and we will finish with a test. You need 80 percent to pass."
+    ]
+  },
+  {
+    id: "meaning",
+    kicker: "Numerator and denominator",
+    title: "What a fraction means",
+    page: "boards/02-meaning.svg",
+    alt: "Textbook page explaining numerator and denominator",
+    lines: [
+      "Look at the triangle on the board. It is divided into four equal parts, and one part is shaded. We write that as 1 over 4.",
+      "The top number is the numerator. It counts the parts we are talking about.",
+      "The bottom number is the denominator. It tells how many equal parts the whole was cut into.",
+      "Five shaded squares out of ten is 5 over 10. Three parts out of eight is 3 over 8.",
+      "Out of eight marbles, three are red. The fraction of red marbles is 3 over 8. Five are green, so the green marbles are 5 over 8.",
+      "A fraction is written with two numbers and a bar between them. The bar means divided into equal parts."
+    ],
+    check: {
+      q: "The number written below the fraction bar is called the",
+      choices: ["numerator", "denominator", "whole number", "mixed number"],
+      answer: 1,
+      why: "The denominator sits below the bar. It names how many equal parts make the whole. The numerator sits above the bar.",
+      retry: {
+        q: "In 3 over 5, which number is the denominator?",
+        choices: ["3", "5", "8", "15"],
+        answer: 1,
+        why: "5 is below the bar, so 5 is the denominator. 3 is the numerator."
+      }
+    }
+  },
+  {
+    id: "types",
+    kicker: "Types of fractions",
+    title: "Unit, proper, improper, mixed, like, unlike",
+    page: "boards/03-types.svg",
+    alt: "Textbook page on types of fractions",
+    lines: [
+      "A unit fraction has 1 as its numerator. One-half, one-fourth and one-tenth are unit fractions.",
+      "A proper fraction has a smaller numerator than denominator. Two-fourths, three-tenths and six-ninths are proper.",
+      "An improper fraction has a numerator greater than or equal to its denominator. Seven-fourths, fifteen-ninths and twenty-three tenths are improper.",
+      "A mixed fraction joins a whole number with a proper fraction. Five and one-half means five wholes and one more half.",
+      "Like fractions share one denominator. One-fourth, two-fourths and three-fourths are like fractions.",
+      "Unlike fractions do not share the denominator. One-half, three-fourths and two-sixths are unlike.",
+      "The page has an animation QR code labelled ANM. We will watch that animation now."
+    ],
+    media: [{
+      afterLine: 6,
+      kind: "video",
+      title: "Animation · types of fractions",
+      url: video("cmm4ch6anm1")
+    }],
+    check: {
+      q: "Which fraction is improper?",
+      choices: ["3/10", "6/9", "7/4", "1/10"],
+      answer: 2,
+      why: "7 is greater than 4, so 7/4 is improper. The others have a smaller numerator than denominator, so they are proper. 1/10 is also a unit fraction.",
+      retry: {
+        q: "A fraction with 1 as the numerator is called a",
+        choices: ["proper fraction", "unit fraction", "mixed fraction", "unlike fraction"],
+        answer: 1,
+        why: "Numerator 1 means a unit fraction. Examples from the page are 1/2, 1/4 and 1/10."
+      }
+    }
+  },
+  {
+    id: "equivalent",
+    kicker: "Equivalent fractions",
+    title: "Same amount, different names",
+    page: "boards/04-equivalent.svg",
+    alt: "Textbook page on equivalent fractions and Exercise 6.1",
+    lines: [
+      "Equivalent fractions look different but name the same amount. On the board, one-fourth of a circle and two-eighths of a circle cover the same part.",
+      "To build an equivalent fraction, multiply the numerator and the denominator by the same number. 1/2 multiplied by 2 over 2 is 2/4.",
+      "To simplify, divide the numerator and the denominator by the same number. 2/8 divided by 2 is 1/4.",
+      "There is a second animation on equivalent fractions. Watch it beside the page."
+    ],
+    media: [{
+      afterLine: 3,
+      kind: "video",
+      title: "Animation · equivalent fractions",
+      url: video("cmm4ch6anm2")
+    }],
+    check: {
+      q: "Which number makes this true? 1/2 = □/4",
+      choices: ["1", "2", "3", "4"],
+      answer: 1,
+      why: "Multiply 1 and 2 by 2. 1 times 2 is 2, and 2 times 2 is 4. So 1/2 equals 2/4.",
+      retry: {
+        q: "2/8 in simplest form is",
+        choices: ["2/4", "1/8", "1/4", "4/8"],
+        answer: 2,
+        why: "Divide 2 and 8 by 2. The simplest form is 1/4."
+      }
+    }
+  },
+  {
+    id: "ex61",
+    kicker: "Exercise 6.1",
+    title: "Shaded parts, unit fractions, and practice",
+    page: "boards/04-equivalent.svg",
+    alt: "Exercise 6.1 on the textbook page",
+    lines: [
+      "Stay on Exercise 6.1. Question 1 asks for the fraction shown by the shaded part.",
+      "The green strip has 1 part shaded out of 6 equal parts. That fraction is 1/6.",
+      "The red figure has 8 small squares shaded out of 16. That fraction is 8/16.",
+      "The diamond has 2 parts shaded out of 8. That fraction is 2/8.",
+      "Question 2 asks for unit fractions. Circle only the fractions whose numerator is 1.",
+      "The page has two interactive QR codes. First, sort the pictures into proper and improper fractions. Then fill the missing numerators and denominators for equivalent fractions."
+    ],
+    media: [
+      { afterLine: 5, kind: "activity", title: "Activity · proper or improper", url: activity("cmm4ch6int1") },
+      { afterLine: 5, kind: "activity", title: "Activity · equivalent fractions", url: activity("cmm4ch6int2") }
+    ],
+    check: {
+      q: "The diamond shows 2 shaded parts out of 8. In simplest form, 2/8 is",
+      choices: ["1/4", "2/4", "1/8", "4/16"],
+      answer: 0,
+      why: "Divide the numerator and the denominator by 2. 2/8 equals 1/4.",
+      retry: {
+        q: "1 shaded part out of 6 equal parts is written as",
+        choices: ["6/1", "1/6", "1/5", "5/6"],
+        answer: 1,
+        why: "The numerator is the shaded part, 1. The denominator is the number of equal parts, 6."
+      }
+    }
+  },
+  {
+    id: "convert",
+    kicker: "Page 78",
+    title: "Improper fractions and mixed numbers",
+    page: "boards/05-convert.svg",
+    alt: "Page on converting improper fractions and mixed numbers",
+    lines: [
+      "An improper fraction and a mixed number can name the same amount. Look at the worked example on the board.",
+      "To change an improper fraction into a mixed number, divide the numerator by the denominator.",
+      "46 divided by 5 is 9, with remainder 1. So 46/5 equals 9 and 1/5.",
+      "To change a mixed number into an improper fraction, multiply the whole number by the denominator, add the numerator, and keep the denominator.",
+      "For 5 and 4/7, do 7 times 5, which is 35, then add 4. That is 39. So the improper fraction is 39/7."
+    ],
+    check: {
+      q: "Write 6 and 1/2 as an improper fraction.",
+      choices: ["7/2", "12/2", "13/2", "6/2"],
+      answer: 2,
+      why: "Multiply 2 by 6, which is 12, then add the numerator 1. 12 plus 1 is 13. The denominator stays 2, so the fraction is 13/2.",
+      retry: {
+        q: "46/5 as a mixed number is",
+        choices: ["8 and 1/5", "9 and 1/5", "9 and 2/5", "5 and 1/9"],
+        answer: 1,
+        why: "5 goes into 46 nine times, because 9 times 5 is 45. The remainder is 1, so it is 9 and 1/5."
+      }
+    }
+  },
+  {
+    id: "simplest",
+    kicker: "Simplest form",
+    title: "Reducing a fraction",
+    page: "boards/06-simplest.svg",
+    alt: "Page on reducing a fraction to its simplest form",
+    lines: [
+      "A fraction is in its simplest form when the numerator and the denominator have no common factor except 1.",
+      "The example on the board is 24/30. The factors of 24 include 2 and 3. The factors of 30 also include 2 and 3.",
+      "First divide both by 2. 24 divided by 2 is 12, and 30 divided by 2 is 15. Now we have 12/15.",
+      "12 and 15 can both be divided by 3. 12 divided by 3 is 4, and 15 divided by 3 is 5.",
+      "4 and 5 share no factor except 1. So 24/30 in simplest form is 4/5.",
+      "This page has a student video QR code labelled SVID. Watch it now."
+    ],
+    media: [{
+      afterLine: 5,
+      kind: "video",
+      title: "Video · simplest form",
+      url: video("cmm4ch6svid1")
+    }],
+    check: {
+      q: "18/30 in simplest form is",
+      choices: ["9/15", "6/10", "3/5", "18/30"],
+      answer: 2,
+      why: "Divide 18 and 30 by 6. 18 divided by 6 is 3, and 30 divided by 6 is 5. 3 and 5 have no common factor except 1.",
+      retry: {
+        q: "14/28 in simplest form is",
+        choices: ["7/14", "1/2", "2/4", "14/28"],
+        answer: 1,
+        why: "14 and 28 can both be divided by 14. 14 divided by 14 is 1, and 28 divided by 14 is 2. The simplest form is 1/2."
+      }
+    }
+  },
+  {
+    id: "compare",
+    kicker: "Page 80",
+    title: "Comparing like fractions and unit fractions",
+    page: "boards/07-compare.svg",
+    alt: "Page comparing like fractions and unit fractions",
+    lines: [
+      "Like fractions have the same denominator. Compare only the numerators. The greater numerator is the greater fraction.",
+      "On the board, 4/7 is greater than 1/7. 5/18 is smaller than 9/18. 13/16 is equal to 13/16.",
+      "Unit fractions all have numerator 1, so the rule changes. Compare the denominators.",
+      "A greater denominator means the whole was cut into more pieces, so each piece is smaller.",
+      "The green bars show this. The half is a large piece. The ninth is a small piece. So 1/2 is greater than 1/9.",
+      "The QR code on this page is the comparing video. Let us watch it."
+    ],
+    media: [{
+      afterLine: 5,
+      kind: "video",
+      title: "Video · comparing fractions",
+      url: video("cmm4ch6svid2")
+    }],
+    check: {
+      q: "Which sign belongs between 1/2 and 1/9?",
+      choices: ["1/2 > 1/9", "1/2 < 1/9", "1/2 = 1/9"],
+      answer: 0,
+      why: "Both are unit fractions. The smaller denominator gives the greater piece. 2 is smaller than 9, so 1/2 is greater than 1/9.",
+      retry: {
+        q: "Which fraction is greater?",
+        choices: ["5/18", "9/18", "They are equal"],
+        answer: 1,
+        why: "The denominators are the same, so compare 5 and 9. 9 is greater, so 9/18 is greater."
+      }
+    }
+  },
+  {
+    id: "order",
+    kicker: "Exercise 6.3",
+    title: "Signs and ascending order",
+    page: "boards/08-order.svg",
+    alt: "Exercise 6.3 on comparing and ordering fractions",
+    lines: [
+      "Exercise 6.3 uses the same idea. If the denominators match, the sign follows the numerators.",
+      "5/7 is greater than 4/7. 6/10 is smaller than 9/10. 12/13 is greater than 5/13.",
+      "For unit fractions, the smaller denominator wins. 1/7 is greater than 1/14. 1/11 is smaller than 1/6. 1/15 is greater than 1/16.",
+      "Ascending order means smallest first. For 1/9, 4/9, 3/9, 5/9 and 7/9, write 1/9, then 3/9, then 4/9, then 5/9, then 7/9.",
+      "Descending order is that same list read from the greatest numerator back to the smallest.",
+      "Two activities sit on this page. First choose the correct sign. Then drag the fractions into ascending order."
+    ],
+    media: [
+      { afterLine: 5, kind: "activity", title: "Activity · compare with a sign", url: activity("cmm4ch6int3") },
+      { afterLine: 5, kind: "activity", title: "Activity · ascending order", url: activity("cmm4ch6int4") }
+    ],
+    check: {
+      q: "What is the ascending order of 2/7, 5/7 and 1/7?",
+      choices: ["5/7, 2/7, 1/7", "1/7, 2/7, 5/7", "2/7, 1/7, 5/7", "1/7, 5/7, 2/7"],
+      answer: 1,
+      why: "The denominator is 7 for each fraction. Order the numerators from small to large: 1, then 2, then 5.",
+      retry: {
+        q: "The correct sign in 6/10 □ 9/10 is",
+        choices: [">", "<", "="],
+        answer: 1,
+        why: "6 is smaller than 9, and the denominators match, so 6/10 is smaller than 9/10."
+      }
+    }
+  },
+  {
+    id: "strips",
+    kicker: "Page 82",
+    title: "Fraction strips",
+    page: "boards/09-strips.svg",
+    alt: "Project page with fraction strips",
+    lines: [
+      "The strips on the board are one whole, halves, thirds, fourths and fifths. A longer strip is the greater fraction.",
+      "The half strip is longer than one part of the fourths strip. So 1/2 is greater than 1/4.",
+      "One part of the fifths strip is shorter than one part of the thirds strip. So 1/5 is smaller than 1/3.",
+      "One fourth is also shorter than one third. So 1/4 is smaller than 1/3.",
+      "You can check any two unit fractions this way. More pieces in the whole means a shorter piece."
+    ],
+    check: {
+      q: "Using the strips, which statement is true?",
+      choices: ["1/5 > 1/3", "1/5 < 1/3", "1/5 = 1/3"],
+      answer: 1,
+      why: "A fifth is a smaller piece than a third, because 5 is a greater denominator than 3.",
+      retry: {
+        q: "1/2 □ 1/4. The correct sign is",
+        choices: [">", "<", "="],
+        answer: 0,
+        why: "A half is larger than a quarter. The strip for 1/2 is longer than the strip for 1/4."
+      }
+    }
+  },
+  {
+    id: "add",
+    kicker: "Like fractions",
+    title: "Adding and subtracting",
+    page: "boards/10-add.svg",
+    alt: "Page on addition and subtraction of like fractions",
+    lines: [
+      "Like fractions can be added or subtracted because they are parts of the same whole. The instructional video for this section comes first. Its QR code is marked IVID at the start of the section."
+    ],
+    media: [{
+      afterLine: 0,
+      kind: "video",
+      title: "Instruction video · like fractions",
+      url: video("cmm4ch6ivid1")
+    }],
+    afterMedia: [
+      "Now look at the pizza on the board. It is cut into 6 equal slices. Misha ate 3 slices and Namita ate 2.",
+      "That is 3/6 plus 2/6. Add the numerators, 3 plus 2, and keep the denominator 6. Together they ate 5/6 of the pizza.",
+      "The next example is 3/9 plus 4/9. 3 plus 4 is 7, and the denominator stays 9. The sum is 7/9.",
+      "Subtraction uses the same rule. Subtract only the numerators. 6/9 minus 2/9 is 4/9.",
+      "Misha ate 3/6 and Namita ate 2/6, so Misha ate 1/6 more than Namita.",
+      "Look at the thinking question. Ritu wrote 5/8 plus 2/8 equals 7/16. The numerators do add to 7, but the denominator must stay 8. She added the denominators, which is not the rule. The correct sum is 7/8."
+    ],
+    check: {
+      q: "3/9 + 4/9 equals",
+      choices: ["7/18", "7/9", "12/9", "1/9"],
+      answer: 1,
+      why: "The denominators are already the same. Add 3 and 4 to get 7, and keep 9. The sum is 7/9.",
+      retry: {
+        q: "Ritu's addition 5/8 + 2/8 should equal",
+        choices: ["7/16", "7/8", "3/8", "10/8"],
+        answer: 1,
+        why: "Add the numerators only. 5 plus 2 is 7, and the denominator stays 8."
+      }
+    }
+  },
+  {
+    id: "ex64",
+    kicker: "Page 84",
+    title: "Exercise 6.4",
+    page: "boards/11-exercise.svg",
+    alt: "Exercise 6.4 on adding and subtracting like fractions",
+    lines: [
+      "Exercise 6.4 is on the board. For every sum, the denominator stays as it is.",
+      "2/9 plus 6/9 is 8/9.",
+      "12/15 minus 7/15 is 5/15.",
+      "5/8 minus 4/8 is 1/8.",
+      "1/7 plus 5/7 is 6/7.",
+      "6/11 plus 3/11 is 9/11.",
+      "8/12 minus 2/12 is 6/12.",
+      "When the box asks for the sign, work out which operation joins the two fractions to the answer.",
+      "5/10 plus 4/10 is 9/10, so that sign is plus. 12/20 minus 4/20 is 8/20, so that sign is minus.",
+      "3/15 plus 8/15 is 11/15. 7/13 plus 5/13 is 12/13. 7/9 minus 2/9 is 5/9. 3/7 minus 1/7 is 2/7."
+    ],
+    check: {
+      q: "Which sign makes 12/20 □ 4/20 = 8/20 true?",
+      choices: ["+", "−", "×"],
+      answer: 1,
+      why: "12 minus 4 is 8. The denominator stays 20. The missing sign is minus.",
+      retry: {
+        q: "2/9 + 6/9 equals",
+        choices: ["8/18", "8/9", "4/9", "12/9"],
+        answer: 1,
+        why: "2 plus 6 is 8, and the denominator stays 9."
+      }
+    }
+  },
+  {
+    id: "words",
+    kicker: "Exercise 6.5",
+    title: "Word problems",
+    page: "boards/12-words.svg",
+    alt: "Word problems page and Exercise 6.5",
+    lines: [
+      "For a word problem, use the UPDC steps on the board. Understand the story. Plan the operation. Do the calculation. Check the answer.",
+      "Sara attempted 17/20 of the questions and Ali attempted 19/20. The denominators match. 19 is greater than 17, so Ali attempted more. The difference is 2/20.",
+      "Sia practised music for 4/9 of an hour. Nur practised for 7/9 of an hour. Nur practised longer. The extra time is 7/9 minus 4/9, which is 3/9 of an hour.",
+      "The electrician uses 9/10 of an hour for a refrigerator and 7/10 of an hour for a fan. Add the numerators. 9 plus 7 is 16. The total is 16/10 hours, which is the same as 1 and 6/10 hours.",
+      "Leena was given 5/6 of a pizza and Reena was given 3/6. Together that is 8/6 of a pizza.",
+      "A cloth 7/2 metres long is cut into two pieces. One piece is 5/2 metres. The other piece is 7/2 minus 5/2, which is 2/2. That is 1 metre.",
+      "Akanksha bought 3/5 litres of milk and drank 1/5 litre. The milk left is 3/5 minus 1/5, which is 2/5 litres."
+    ],
+    check: {
+      q: "A cloth is 7/2 metres long. One piece cut from it is 5/2 metres. How long is the other piece?",
+      choices: ["12/2 metres", "2/4 metres", "1 metre", "2/7 metre"],
+      answer: 2,
+      why: "Subtract like fractions. 7 minus 5 is 2, so the piece is 2/2 metres. 2/2 equals 1 whole metre.",
+      retry: {
+        q: "Who practised longer, Sia for 4/9 hour or Nur for 7/9 hour?",
+        choices: ["Sia", "Nur", "They practised the same time"],
+        answer: 1,
+        why: "The denominators are the same and 7 is greater than 4, so Nur practised longer."
+      }
+    }
+  },
+  {
+    id: "review",
+    kicker: "Chapter review",
+    title: "Review, then the test",
+    page: "boards/13-review.svg",
+    alt: "Chapter review page",
+    lines: [
+      "The chapter review is on the board. Let us lock in the five short answers before the test.",
+      "A fraction with numerator 1 is a unit fraction. Fractions with the same denominator are like fractions.",
+      "8/12 minus 3/12 is 5/12. Only the numerators are subtracted.",
+      "1/12 is smaller than 3/12, because both fractions are twelfths and 1 is smaller than 3.",
+      "7/9 plus 2/9 is 9/9. Nine ninths is one whole.",
+      "In the list 1/9, 3/8, 7/9, 3/9 and 2/9, the odd one is 3/8. Every other fraction has denominator 9.",
+      "In the list 2/3, 14/21, 12/18, 3/15 and 20/30, four fractions equal 2/3. 3/15 equals 1/5, so 3/15 is the odd one.",
+      "The test has 10 questions from this chapter. The pass mark is 8 out of 10. If the score is lower, we take another test."
+    ]
+  }
+];
+
+const BANK = [
+  { id: "u1", topic: "unit", q: "The fraction with 1 as the numerator is called a", choices: ["proper fraction", "improper fraction", "unit fraction", "mixed fraction"], answer: 2, why: "A unit fraction has numerator 1, such as 1/2 or 1/10." },
+  { id: "l1", topic: "like", q: "Two or more fractions with the same denominator are called", choices: ["unlike fractions", "like fractions", "unit fractions", "mixed fractions"], answer: 1, why: "Same denominator means like fractions. 1/4, 2/4 and 3/4 are like fractions." },
+  { id: "s1", topic: "subtract", q: "8/12 − 3/12 equals", choices: ["5/12", "11/12", "5/24", "11/24"], answer: 0, why: "Subtract the numerators. 8 minus 3 is 5. The denominator stays 12." },
+  { id: "c1", topic: "yesno", q: "Is 1/12 smaller than 3/12?", choices: ["Yes", "No"], answer: 0, why: "Both are twelfths. 1 is smaller than 3, so 1/12 is smaller." },
+  { id: "w1", topic: "whole", q: "7/9 + 2/9 equals", choices: ["9/18", "5/9", "1", "9/7"], answer: 2, why: "7 plus 2 is 9. 9/9 equals 1 whole." },
+  { id: "w2", topic: "wholetype", q: "The sum of 7/9 and 2/9 is", choices: ["a proper fraction", "a unit fraction", "a whole", "an unlike fraction"], answer: 2, why: "The sum is 9/9, which is one whole." },
+  { id: "o1", topic: "odd", q: "Find the odd one out: 1/9, 3/8, 7/9, 3/9, 2/9.", choices: ["1/9", "3/8", "7/9", "2/9"], answer: 1, why: "3/8 has denominator 8. The others are ninths, so they are like fractions." },
+  { id: "o2", topic: "odd2", q: "Find the odd one out: 2/3, 14/21, 12/18, 3/15, 20/30.", choices: ["2/3", "14/21", "3/15", "20/30"], answer: 2, why: "2/3, 14/21, 12/18 and 20/30 all equal 2/3. 3/15 equals 1/5." },
+  { id: "t1", topic: "proper", q: "A fraction whose numerator is smaller than its denominator is", choices: ["improper", "proper", "mixed", "unit only"], answer: 1, why: "Numerator smaller than denominator means a proper fraction." },
+  { id: "t2", topic: "improper", q: "A fraction whose numerator is greater than or equal to its denominator is", choices: ["proper", "unit", "improper", "like"], answer: 2, why: "That is the definition of an improper fraction. 7/4 and 9/9 are improper." },
+  { id: "m1", topic: "mixed", q: "6 and 1/2 written as an improper fraction is", choices: ["7/2", "13/2", "12/2", "8/2"], answer: 1, why: "2 times 6 is 12, plus 1 is 13. The improper fraction is 13/2." },
+  { id: "m2", topic: "mixed2", q: "46/5 written as a mixed number is", choices: ["9 and 1/5", "8 and 6/5", "9 and 2/5", "5 and 1/9"], answer: 0, why: "46 divided by 5 is 9 remainder 1, so 9 and 1/5." },
+  { id: "m3", topic: "mixed3", q: "5 and 4/7 written as an improper fraction is", choices: ["20/7", "39/7", "9/7", "35/7"], answer: 1, why: "7 times 5 is 35, plus 4 is 39. The fraction is 39/7." },
+  { id: "r1", topic: "reduce", q: "24/30 in simplest form is", choices: ["12/15", "6/10", "4/5", "2/3"], answer: 2, why: "Divide by 2 and then by 3. 24/30 equals 4/5." },
+  { id: "r2", topic: "reduce2", q: "18/30 in simplest form is", choices: ["9/15", "3/5", "6/15", "2/3"], answer: 1, why: "Divide 18 and 30 by 6. The simplest form is 3/5." },
+  { id: "r3", topic: "reduce3", q: "15/60 in simplest form is", choices: ["3/12", "1/4", "5/20", "1/5"], answer: 1, why: "Divide 15 and 60 by 15. The simplest form is 1/4." },
+  { id: "r4", topic: "reduce4", q: "10/25 in simplest form is", choices: ["2/5", "5/10", "1/5", "4/10"], answer: 0, why: "Divide 10 and 25 by 5. The simplest form is 2/5." },
+  { id: "g1", topic: "sign", q: "The correct statement is", choices: ["5/7 < 4/7", "5/7 > 4/7", "5/7 = 4/7"], answer: 1, why: "Same denominator. 5 is greater than 4, so 5/7 is greater." },
+  { id: "g2", topic: "unitcmp", q: "The correct statement is", choices: ["1/2 < 1/9", "1/2 = 1/9", "1/2 > 1/9"], answer: 2, why: "For unit fractions, the smaller denominator is the greater fraction." },
+  { id: "g3", topic: "sign2", q: "The correct sign for 5/18 □ 9/18 is", choices: [">", "<", "="], answer: 1, why: "5 is smaller than 9, so 5/18 is smaller than 9/18." },
+  { id: "a1", topic: "add", q: "3/9 + 4/9 equals", choices: ["7/18", "7/9", "1/9", "12/9"], answer: 1, why: "Add numerators only. 3 plus 4 is 7, denominator 9." },
+  { id: "a2", topic: "add2", q: "Misha ate 3/6 of a pizza and Namita ate 2/6. Together they ate", choices: ["5/12", "5/6", "1/6", "6/6"], answer: 1, why: "3 plus 2 is 5. The pizza was cut into 6 slices, so they ate 5/6." },
+  { id: "a3", topic: "sub2", q: "6/9 − 2/9 equals", choices: ["4/9", "4/18", "8/9", "4/0"], answer: 0, why: "6 minus 2 is 4. The denominator stays 9." },
+  { id: "a4", topic: "ritu", q: "5/8 + 2/8 equals", choices: ["7/16", "7/8", "3/8", "10/16"], answer: 1, why: "Do not add the denominators. The correct sum is 7/8." },
+  { id: "a5", topic: "exadd", q: "2/9 + 6/9 equals", choices: ["8/18", "8/9", "4/9", "12/18"], answer: 1, why: "2 plus 6 is 8. The denominator stays 9." },
+  { id: "a6", topic: "exsub", q: "12/15 − 7/15 equals", choices: ["5/15", "19/15", "5/30", "5/0"], answer: 0, why: "12 minus 7 is 5. The denominator stays 15." },
+  { id: "a7", topic: "signbox", q: "The missing sign in 5/10 □ 4/10 = 9/10 is", choices: ["+", "−", "×"], answer: 0, why: "5 plus 4 is 9, so the operation is addition." },
+  { id: "p1", topic: "nur", q: "Sia practised for 4/9 hour and Nur for 7/9 hour. Who practised longer?", choices: ["Sia", "Nur", "Same time"], answer: 1, why: "7/9 is greater than 4/9." },
+  { id: "p2", topic: "gap", q: "How much longer did Nur practise than Sia?", choices: ["3/9 hour", "11/9 hour", "3/18 hour", "4/7 hour"], answer: 0, why: "7/9 minus 4/9 is 3/9 of an hour." },
+  { id: "p3", topic: "cloth", q: "A cloth of 7/2 m is cut. One piece is 5/2 m. The other piece is", choices: ["12/2 m", "2/2 m, which is 1 m", "2/7 m", "35/4 m"], answer: 1, why: "7/2 minus 5/2 is 2/2, and 2/2 is 1 metre." },
+  { id: "p4", topic: "milk", q: "Akanksha bought 3/5 litres and used 1/5 litre. Milk left is", choices: ["4/5 litres", "2/5 litres", "2/10 litres", "3/4 litres"], answer: 1, why: "3/5 minus 1/5 is 2/5 litres." },
+  { id: "p5", topic: "pizza2", q: "Leena received 5/6 of a pizza and Reena received 3/6. Together they received", choices: ["8/12", "8/6", "2/6", "15/6"], answer: 1, why: "5 plus 3 is 8. The denominator stays 6." },
+  { id: "p6", topic: "ali", q: "Sara attempted 17/20 and Ali attempted 19/20. Ali attempted more by", choices: ["2/20", "2/40", "36/20", "19/17"], answer: 0, why: "19 minus 17 is 2. The difference is 2/20." },
+  { id: "e1", topic: "equiv", q: "1/2 equals", choices: ["1/4", "2/4", "2/2", "3/4"], answer: 1, why: "Multiply numerator and denominator by 2. 1/2 equals 2/4." },
+  { id: "e2", topic: "shade", q: "1 part shaded out of 6 equal parts is", choices: ["6/1", "1/5", "1/6", "5/6"], answer: 2, why: "Shaded parts over equal parts is 1/6." },
+  { id: "ord", topic: "order", q: "The ascending order of 1/9, 4/9, 3/9, 5/9, 7/9 is", choices: ["7/9, 5/9, 4/9, 3/9, 1/9", "1/9, 3/9, 4/9, 5/9, 7/9", "1/9, 4/9, 3/9, 5/9, 7/9", "3/9, 1/9, 4/9, 7/9, 5/9"], answer: 1, why: "Same denominator. Order the numerators 1, 3, 4, 5, 7." },
+  { id: "elec", topic: "time", q: "9/10 hour plus 7/10 hour equals", choices: ["16/20 hour", "16/10 hours", "2/10 hour", "63/10 hours"], answer: 1, why: "9 plus 7 is 16. The total time is 16/10 hours." }
+];
+
+const stepsEl = document.getElementById("steps");
+const pageEl = document.getElementById("page");
+const boardKicker = document.getElementById("board-kicker");
+const boardPage = document.getElementById("board-page");
+const boardFace = document.getElementById("board-face");
+const mediaEl = document.getElementById("media");
+const mediaTitle = document.getElementById("media-title");
+const mediaOpen = document.getElementById("media-open");
+const mediaFrame = document.getElementById("media-frame");
+const saidEl = document.getElementById("said");
+const controlsEl = document.getElementById("controls");
+const checkEl = document.getElementById("check");
+const testEl = document.getElementById("test");
+const modeLabel = document.getElementById("mode-label");
+const stepTitle = document.getElementById("step-title");
+const attemptPill = document.getElementById("attempt-pill");
+
+let stepIndex = 0;
+let lineIndex = 0;
+let lineBucket = "lines";
+let speaking = false;
+let paused = false;
+let token = 0;
+let mediaQueue = [];
+let checkState = null;
+let mode = "lesson";
+let paper = [];
+let attempts = loadAttempts();
+let seenIds = attempts.flatMap(a => a.ids || []);
+
+function loadAttempts() {
+  try { return JSON.parse(localStorage.getItem("cmm4-ch6-attempts") || "[]"); }
+  catch (e) { return []; }
+}
+function saveAttempts() {
+  localStorage.setItem("cmm4-ch6-attempts", JSON.stringify(attempts));
+  const last = attempts[attempts.length - 1];
+  attemptPill.textContent = last
+    ? "Last score " + last.correct + "/10 · pass mark 80%"
+    : "Pass mark 80%";
+}
+
+function shuffle(list) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderNav() {
+  stepsEl.innerHTML = "";
+  LESSON.forEach((step, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "step" + (i === stepIndex && mode === "lesson" ? " on" : "") + (i < stepIndex ? " done" : "");
+    b.innerHTML = "<small>" + step.kicker + "</small>" + step.title;
+    b.addEventListener("click", () => goStep(i));
+    stepsEl.appendChild(b);
+  });
+  const t = document.createElement("button");
+  t.type = "button";
+  t.className = "step" + (mode === "test" ? " on" : "");
+  t.innerHTML = "<small>Pass mark 80%</small>Chapter test";
+  t.addEventListener("click", () => startTest(false));
+  stepsEl.appendChild(t);
+}
+
+function hideMedia() {
+  mediaEl.classList.add("hidden");
+  boardFace.classList.remove("split");
+  mediaFrame.src = "about:blank";
+}
+
+function showMedia(item) {
+  boardFace.classList.add("split");
+  mediaEl.classList.remove("hidden");
+  mediaTitle.textContent = item.title;
+  mediaOpen.href = item.url;
+  mediaFrame.src = item.url;
+}
+
+function currentLines() {
+  const step = LESSON[stepIndex];
+  if (lineBucket === "after") return step.afterMedia || [];
+  return step.lines;
+}
+
+function showSentence() {
+  const lines = currentLines();
+  const step = LESSON[stepIndex];
+  modeLabel.textContent = "Teacher";
+  stepTitle.textContent = step.title;
+  boardKicker.textContent = "On the board";
+  boardPage.textContent = step.kicker;
+  pageEl.src = step.page;
+  pageEl.alt = step.alt;
+  saidEl.textContent = lines[lineIndex] || "";
+  checkEl.classList.add("hidden");
+  testEl.classList.add("hidden");
+  controlsEl.classList.remove("hidden");
+  renderControls();
+}
+
+function renderControls() {
+  const lines = currentLines();
+  controlsEl.innerHTML = "";
+  const status = document.createElement("div");
+  status.className = "history";
+  status.textContent = "Sentence " + (lineIndex + 1) + " of " + lines.length + (speaking ? " · speaking" : paused ? " · paused" : "");
+  controlsEl.appendChild(status);
+  const row = document.createElement("div");
+  row.className = "row";
+  row.appendChild(button(paused || !speaking ? "Speak" : "Pause", "primary", () => {
+    if (speaking && !paused) {
+      paused = true;
+      window.speechSynthesis && speechSynthesis.cancel();
+      speaking = false;
+      renderControls();
+    } else {
+      paused = false;
+      speakCurrent();
+    }
+  }));
+  row.appendChild(button("Again", "", () => { paused = false; speakCurrent(); }));
+  row.appendChild(button("Next sentence", "", () => nextSentence()));
+  controlsEl.appendChild(row);
+}
+
+function button(label, cls, fn) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "btn" + (cls ? " " + cls : "");
+  b.textContent = label;
+  b.addEventListener("click", fn);
+  return b;
+}
+
+function pickVoice() {
+  const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  return voices.find(v => v.lang === "en-IN")
+    || voices.find(v => /en-GB/i.test(v.lang) && /female|google|natural/i.test(v.name))
+    || voices.find(v => v.lang && v.lang.startsWith("en"))
+    || null;
+}
+
+function speak(text) {
+  const my = ++token;
+  if (!window.speechSynthesis) return Promise.resolve(my);
+  return new Promise(resolve => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      resolve(my);
+    };
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.92;
+    u.lang = "en-IN";
+    const voice = pickVoice();
+    if (voice) u.voice = voice;
+    u.onend = finish;
+    u.onerror = finish;
+    speechSynthesis.resume();
+    speechSynthesis.speak(u);
+    setTimeout(finish, Math.min(28000, 1800 + text.length * 85));
+  });
+}
+
+async function speakCurrent() {
+  if (mode !== "lesson") return;
+  const lines = currentLines();
+  if (!lines[lineIndex]) return;
+  speaking = true;
+  paused = false;
+  showSentence();
+  const my = await speak(lines[lineIndex]);
+  speaking = false;
+  if (my !== token || paused || mode !== "lesson") return;
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.media) {
+    const due = step.media.filter(m => m.afterLine === lineIndex);
+    if (due.length) {
+      mediaQueue = due.slice();
+      openNextMedia();
+      return;
+    }
+  }
+  lineIndex += 1;
+  if (lineIndex >= lines.length) {
+    finishLines();
+    return;
+  }
+  speakCurrent();
+}
+
+function finishLines() {
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.afterMedia && !(step.media && step.media.length)) {
+    lineBucket = "after";
+    lineIndex = 0;
+    speakCurrent();
+    return;
+  }
+  if (step.check) {
+    openCheck(step.check, false);
+    return;
+  }
+  if (stepIndex === LESSON.length - 1) {
+    startTest(true);
+    return;
+  }
+  saidEl.textContent = "That part is complete. We move to the next page.";
+  controlsEl.innerHTML = "";
+  controlsEl.appendChild(button("Next page", "primary", () => goStep(stepIndex + 1)));
+}
+
+function openNextMedia() {
+  const item = mediaQueue.shift();
+  if (!item) {
+    const step = LESSON[stepIndex];
+    if (step.afterMedia) {
+      lineBucket = "after";
+      lineIndex = 0;
+      speakCurrent();
+      return;
+    }
+    lineIndex += 1;
+    const lines = currentLines();
+    if (lineIndex >= lines.length) finishLines();
+    else speakCurrent();
+    return;
+  }
+  token++;
+  speaking = false;
+  window.speechSynthesis && speechSynthesis.cancel();
+  showMedia(item);
+  saidEl.textContent = item.kind === "video"
+    ? "The video from the QR code is playing on the board, next to the page. Watch it, then we continue."
+    : "The book's activity is open on the board, next to the page. Try it, then we continue.";
+  controlsEl.innerHTML = "";
+  const row = document.createElement("div");
+  row.className = "row";
+  row.appendChild(button(mediaQueue.length ? "Next activity" : "Continue the lesson", "primary", () => {
+    if (!mediaQueue.length) hideMedia();
+    openNextMedia();
+  }));
+  controlsEl.appendChild(row);
+  speak(saidEl.textContent);
+}
+
+function nextSentence() {
+  token++;
+  speaking = false;
+  paused = false;
+  window.speechSynthesis && speechSynthesis.cancel();
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.media) {
+    const due = step.media.filter(m => m.afterLine === lineIndex);
+    if (due.length) {
+      mediaQueue = due.slice();
+      openNextMedia();
+      return;
+    }
+  }
+  lineIndex += 1;
+  const lines = currentLines();
+  if (lineIndex >= lines.length) finishLines();
+  else speakCurrent();
+}
+
+function openCheck(check, isRetry) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  speaking = false;
+  checkState = { check, isRetry, misses: 0 };
+  controlsEl.classList.add("hidden");
+  checkEl.classList.remove("hidden");
+  modeLabel.textContent = "Check";
+  saidEl.textContent = "Answer this before we turn the page.";
+  drawCheck();
+  speak(check.q);
+}
+
+function drawCheck() {
+  const { check } = checkState;
+  checkEl.innerHTML = "<h3>Check</h3>";
+  const q = document.createElement("p");
+  q.style.marginTop = "0";
+  q.textContent = check.q;
+  checkEl.appendChild(q);
+  const box = document.createElement("div");
+  box.className = "choices";
+  check.choices.forEach((choice, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = choice;
+    b.addEventListener("click", () => answerCheck(i, b, box));
+    box.appendChild(b);
+  });
+  checkEl.appendChild(box);
+}
+
+function answerCheck(i, buttonEl, box) {
+  const state = checkState;
+  if (i === state.check.answer) {
+    buttonEl.classList.add("good");
+    const note = document.createElement("div");
+    note.className = "note good";
+    note.textContent = "Yes. " + state.check.why;
+    checkEl.appendChild(note);
+    [...box.children].forEach(el => el.disabled = true);
+    const row = document.createElement("div");
+    row.className = "row";
+    row.style.marginTop = "10px";
+    const last = stepIndex === LESSON.length - 1;
+    row.appendChild(button(last ? "Start the test" : "Next page", "primary", () => {
+      checkEl.classList.add("hidden");
+      controlsEl.classList.remove("hidden");
+      if (last) startTest(true);
+      else goStep(stepIndex + 1);
+    }));
+    checkEl.appendChild(row);
+    speak("Yes. " + state.check.why);
+    return;
+  }
+  state.misses += 1;
+  buttonEl.classList.add("bad");
+  let note = checkEl.querySelector(".note");
+  if (!note) {
+    note = document.createElement("div");
+    checkEl.appendChild(note);
+  }
+  note.className = "note bad";
+  note.textContent = state.check.why;
+  speak(state.check.why);
+  if (state.misses >= 2 && state.check.retry && !state.isRetry) {
+    const again = document.createElement("div");
+    again.className = "row";
+    again.style.marginTop = "10px";
+    again.appendChild(button("Try a second question", "primary", () => openCheck(state.check.retry, true)));
+    checkEl.appendChild(again);
+  }
+}
+
+function goStep(i) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  mode = "lesson";
+  stepIndex = i;
+  lineIndex = 0;
+  lineBucket = "lines";
+  mediaQueue = [];
+  paused = false;
+  hideMedia();
+  checkEl.classList.add("hidden");
+  testEl.classList.add("hidden");
+  controlsEl.classList.remove("hidden");
+  renderNav();
+  showSentence();
+  speakCurrent();
+}
+
+function makePaper() {
+  const fresh = BANK.filter(q => !seenIds.includes(q.id));
+  let pool = fresh.length >= 10 ? fresh : BANK.slice();
+  pool = shuffle(pool);
+  const paper = [];
+  const topics = new Set();
+  pool.forEach(q => {
+    if (paper.length >= 10) return;
+    if (topics.has(q.topic)) return;
+    topics.add(q.topic);
+    paper.push(q);
+  });
+  pool.forEach(q => {
+    if (paper.length >= 10) return;
+    if (!paper.includes(q)) paper.push(q);
+  });
+  return shuffle(paper).slice(0, 10);
+}
+
+function startTest(speakIntro) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  hideMedia();
+  mode = "test";
+  const review = LESSON[LESSON.length - 1];
+  pageEl.src = review.page;
+  pageEl.alt = review.alt;
+  boardKicker.textContent = "On the board";
+  boardPage.textContent = "Chapter review";
+  modeLabel.textContent = "Test";
+  stepTitle.textContent = "Ten questions · pass mark 80%";
+  saidEl.textContent = "The chapter review stays on the board. Answer all ten questions, then I will mark them. You need 8 correct answers.";
+  controlsEl.classList.add("hidden");
+  checkEl.classList.add("hidden");
+  testEl.classList.remove("hidden");
+  paper = makePaper();
+  renderNav();
+  drawPaper(null);
+  if (speakIntro) speak(saidEl.textContent);
+}
+
+function drawPaper(result) {
+  testEl.innerHTML = "";
+  const h = document.createElement("h3");
+  h.textContent = result ? "Result" : "Chapter test";
+  testEl.appendChild(h);
+  if (!result) {
+    const intro = document.createElement("p");
+    intro.textContent = "Attempt " + (attempts.length + 1) + ". Choose one answer for each question.";
+    testEl.appendChild(intro);
+  } else {
+    const score = document.createElement("p");
+    score.className = "scoreline";
+    score.textContent = result.correct + " / 10 · " + result.percent + "%";
+    testEl.appendChild(score);
+    const verdict = document.createElement("div");
+    verdict.className = "note " + (result.passed ? "good" : "bad");
+    verdict.textContent = result.passed
+      ? "Passed. The mark is at least 80%. This chapter test is complete."
+      : "Not yet. The pass mark is 80%, so 8 out of 10. Read the corrections, then take a new test.";
+    testEl.appendChild(verdict);
+  }
+  if (attempts.length) {
+    const hist = document.createElement("div");
+    hist.className = "history";
+    attempts.forEach((a, n) => {
+      const d = document.createElement("div");
+      d.textContent = "Attempt " + (n + 1) + ": " + a.correct + "/10 (" + a.percent + "%) " + (a.passed ? "passed" : "below the pass mark");
+      hist.appendChild(d);
+    });
+    testEl.appendChild(hist);
+  }
+  paper.forEach((q, index) => {
+    const block = document.createElement("div");
+    block.className = "q";
+    const p = document.createElement("p");
+    p.textContent = (index + 1) + ". " + q.q;
+    block.appendChild(p);
+    q.choices.forEach((choice, ci) => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = q.id;
+      input.value = String(ci);
+      if (result) input.disabled = true;
+      if (result && result.picks[q.id] === ci) input.checked = true;
+      label.appendChild(input);
+      const span = document.createElement("span");
+      span.textContent = choice;
+      if (result && ci === q.answer) span.style.fontWeight = "680";
+      label.appendChild(span);
+      block.appendChild(label);
+    });
+    if (result && result.picks[q.id] !== q.answer) {
+      const why = document.createElement("div");
+      why.className = "note bad";
+      const chosen = result.picks[q.id];
+      why.textContent = (chosen == null ? "No answer was chosen. " : "The chosen answer was not right. ") + q.why;
+      block.appendChild(why);
+    } else if (result) {
+      const why = document.createElement("div");
+      why.className = "note good";
+      why.textContent = "Correct. " + q.why;
+      block.appendChild(why);
+    }
+    testEl.appendChild(block);
+  });
+  const row = document.createElement("div");
+  row.className = "row";
+  if (!result) {
+    row.appendChild(button("Mark the test", "primary", gradePaper));
+    row.appendChild(button("Read question 1 aloud", "", () => speak("Question 1. " + paper[0].q)));
+  } else if (!result.passed) {
+    row.appendChild(button("Take the next test", "primary", () => startTest(true)));
+  } else {
+    row.appendChild(button("Hear the result", "", () => speak("You passed with " + result.correct + " out of 10. That is " + result.percent + " percent.")));
+  }
+  testEl.appendChild(row);
+}
+
+function gradePaper() {
+  const picks = {};
+  let correct = 0;
+  paper.forEach(q => {
+    const selected = testEl.querySelector("input[name='" + q.id + "']:checked");
+    const value = selected ? Number(selected.value) : null;
+    picks[q.id] = value;
+    if (value === q.answer) correct += 1;
+  });
+  const percent = Math.round((correct / paper.length) * 100);
+  const result = { correct, percent, passed: percent >= 80, picks, ids: paper.map(q => q.id) };
+  attempts.push({ correct, percent, passed: result.passed, ids: result.ids });
+  seenIds = seenIds.concat(result.ids);
+  saveAttempts();
+  drawPaper(result);
+  const verdict = result.passed
+    ? "You scored " + correct + " out of 10, which is " + percent + " percent. You have passed."
+    : "You scored " + correct + " out of 10, which is " + percent + " percent. The pass mark is 80 percent. We will take another test.";
+  saidEl.textContent = verdict;
+  speak(verdict);
+}
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("gate").classList.add("hidden");
+  saveAttempts();
+  renderNav();
+  goStep(0);
+});
+
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = () => pickVoice();
+  speechSynthesis.getVoices();
+}
+saveAttempts();
+renderNav();
+</script>
+</body>
+</html>

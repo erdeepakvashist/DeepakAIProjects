@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 11 · Time</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Source+Sans+3:wght@400;560;680&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #241c14;
+    --ink-soft: #5c5146;
+    --paper: #f6f1e7;
+    --board: #efe4d2;
+    --frame: #6e5132;
+    --room: #1e1914;
+    --rail: #2a241c;
+    --line: #e2d5c3;
+    --accent: #9c4221;
+    --accent-ink: #fff8f3;
+    --good: #1f6b43;
+    --good-bg: #e5f3ea;
+    --bad: #8d3428;
+    --bad-bg: #f8e8e4;
+    --mark: #c9842a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--room);
+    height: 100%;
+  }
+  button, input { font: inherit; }
+  button { cursor: pointer; }
+  .room {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr) 380px;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+  header.top {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 16px;
+    color: #f3eadf;
+    border-bottom: 1px solid #3a3128;
+  }
+  header.top h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 20px;
+    font-weight: 640;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  header.top p { margin: 0; color: #cbbba8; font-size: 14px; }
+  .grow { flex: 1; }
+  .mark-pill {
+    border: 1px solid #6b5340;
+    color: #f0d7b4;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+  nav.steps {
+    background: var(--rail);
+    color: #efe6da;
+    overflow: auto;
+    padding: 10px;
+    border-right: 1px solid #3a3128;
+  }
+  nav.steps button.step {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    color: #e7dccf;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+  }
+  nav.steps button.step small {
+    display: block;
+    color: #b5a594;
+    font-size: 12px;
+  }
+  nav.steps button.step.on {
+    background: #3d3228;
+    color: white;
+  }
+  nav.steps button.step.done small { color: #d7b48a; }
+  .stage {
+    min-width: 0;
+    min-height: 0;
+    padding: 14px;
+    display: flex;
+  }
+  .board {
+    flex: 1;
+    min-width: 0;
+    background: var(--frame);
+    border-radius: 14px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .board-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: #f3e6d4;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .board-face {
+    flex: 1;
+    min-height: 0;
+    background: var(--board);
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+  }
+  .board-face.split { grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr); }
+  .page-wrap, .media-wrap {
+    min-width: 0;
+    min-height: 0;
+    position: relative;
+    background: #e7dccb;
+  }
+  .page-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #e7dccb;
+  }
+  .media-wrap {
+    display: flex;
+    flex-direction: column;
+    background: #16130f;
+    border-left: 3px solid var(--frame);
+  }
+  .media-wrap header {
+    color: #f6efe4;
+    padding: 8px 10px;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+  }
+  .media-wrap header a { color: #f0d7b4; }
+  .media-wrap iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: black;
+    min-height: 220px;
+  }
+  aside.teacher {
+    background: var(--paper);
+    border-left: 1px solid #3a3128;
+    min-height: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .teacher-head {
+    padding: 14px 16px 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .teacher-head span {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 680;
+  }
+  .teacher-head strong {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 22px;
+    font-weight: 640;
+  }
+  .said {
+    margin: 14px 16px;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 22px;
+    line-height: 1.35;
+    font-weight: 520;
+  }
+  .controls, .check, .test {
+    margin: 0 16px 16px;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; }
+  button.btn {
+    background: white;
+    border: 1px solid #d9cbb8;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--ink);
+  }
+  button.btn.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+  button.btn:disabled { opacity: 0.45; cursor: default; }
+  .check h3, .test h3 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choices button {
+    text-align: left;
+    background: white;
+    border: 1px solid #d9cbb8;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .choices button.good { background: var(--good-bg); border-color: var(--good); }
+  .choices button.bad { background: var(--bad-bg); border-color: var(--bad); }
+  .note {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    line-height: 1.4;
+  }
+  .note.good { background: var(--good-bg); border-color: #b7dcc6; }
+  .note.bad { background: var(--bad-bg); border-color: #efc7c0; }
+  .test .q {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .test .q p { margin: 0 0 8px; font-weight: 680; }
+  .test label {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    align-items: flex-start;
+  }
+  .scoreline {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 28px;
+    margin: 0 0 6px;
+  }
+  .history { font-size: 14px; color: var(--ink-soft); margin: 8px 0; }
+  .history div { padding: 2px 0; }
+  .gate {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 16, 12, 0.72);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 5;
+  }
+  .gate article {
+    background: var(--paper);
+    max-width: 520px;
+    border-radius: 16px;
+    padding: 28px 28px 22px;
+  }
+  .gate h2 {
+    font-family: Fraunces, Georgia, serif;
+    font-size: 32px;
+    margin: 0 0 8px;
+  }
+  .gate p { margin: 0 0 10px; line-height: 1.45; color: var(--ink-soft); }
+  .hidden { display: none !important; }
+  @media (max-width: 980px) {
+    .room {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto minmax(320px, 52vh) auto;
+      height: auto;
+      min-height: 100%;
+    }
+    nav.steps { display: flex; gap: 6px; overflow: auto; border-right: 0; }
+    nav.steps button.step { width: auto; min-width: 160px; }
+    .board-face.split { grid-template-columns: 1fr; }
+    .media-wrap { border-left: 0; border-top: 3px solid var(--frame); min-height: 280px; }
+    aside.teacher { border-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="room">
+  <header class="top">
+    <div>
+      <h1>Chapter 11 · Time</h1>
+      <p>Class lesson from the textbook pages. The board shows the idea being taught.</p>
+    </div>
+    <div class="grow"></div>
+    <a href="index.html" style="color:#f0d7b4;text-decoration:none">All chapters</a>
+    <div class="mark-pill" id="attempt-pill">Pass mark 80%</div>
+  </header>
+  <nav class="steps" id="steps"></nav>
+  <main class="stage">
+    <section class="board" aria-label="Classroom board">
+      <div class="board-label">
+        <span id="board-kicker">Board</span>
+        <span id="board-page"></span>
+      </div>
+      <div class="board-face" id="board-face">
+        <div class="page-wrap">
+          <img id="page" alt="Lesson board">
+        </div>
+        <div class="media-wrap hidden" id="media">
+          <header>
+            <span id="media-title">Video</span>
+            <a id="media-open" href="#" target="_blank" rel="noopener">Open in a new tab</a>
+          </header>
+          <iframe id="media-frame" title="Textbook video or activity" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+  <aside class="teacher" aria-label="Teacher">
+    <div class="teacher-head">
+      <span id="mode-label">Teacher</span>
+      <strong id="step-title">Time</strong>
+    </div>
+    <div class="said" id="said"></div>
+    <div class="controls" id="controls"></div>
+    <div class="check hidden" id="check"></div>
+    <div class="test hidden" id="test"></div>
+  </aside>
+</div>
+<div class="gate" id="gate">
+  <article>
+    <h2>Class is ready.</h2>
+    <p>I will teach the first part of Chapter 11, Time. The board shows each idea. The a.m. and p.m. animation from the book plays beside the board.</p>
+    <p>I will stop for a short question after each idea. At the end there is a test. The pass mark is 8 out of 10, which is 80%. A lower score means a new test, until the mark is high enough.</p>
+    <p>Turn the sound on. The lesson is spoken.</p>
+    <button class="btn primary" id="start-btn" type="button">Start the lesson</button>
+  </article>
+</div>
+<script>
+const PLAYER = "https://qrassets.s3.ap-south-1.amazonaws.com/videoplayertemplate/index.html?videofile=";
+const ASSET = "https://qrassets.s3.ap-south-1.amazonaws.com/CMM/CMM4/Chapter11/";
+function video(id) {
+  return PLAYER + ASSET + id + "/master.m3u8";
+}
+function activity(id) {
+  return ASSET + id + "/index.html";
+}
+
+const LESSON = [
+  {
+    id: "open",
+    kicker: "Chapter 11",
+    title: "Opening the chapter",
+    page: "boards-time/01-open.svg",
+    alt: "Chapter 11 Time opening board",
+    lines: [
+      "Good afternoon. Open Chapter 11, Time.",
+      "Shilpa can remember that school prayer starts at 7:57, but she cannot yet read that time on a clock. That is our work today.",
+      "We will read a clock to the exact minute, say a time as minutes past or minutes to, and decide whether a time is a.m. or p.m.",
+      "The chapter also has the 24-hour clock, the calendar, dates, leap years, and a timeline. We will take those when those pages are here.",
+      "At the end there is a test. You need 8 out of 10 to pass."
+    ]
+  },
+  {
+    id: "warmup",
+    kicker: "Warm-up",
+    title: "Mark my time",
+    page: "boards-time/02-warmup.svg",
+    alt: "Clocks showing times before and after a few minutes",
+    lines: [
+      "The warm-up is called Mark my time. Each pair of clocks shows a start time and the time after some minutes.",
+      "Making the bed took 15 minutes. The first clock is 3:00. Fifteen minutes later the minute hand is on the 3. The time is 3:15.",
+      "Cycling took 30 minutes. The start is 10:00. Thirty minutes later the minute hand is on the 6. The time is 10:30.",
+      "The meal took 10 minutes. The start is 7:00. Ten minutes later the minute hand is on the 2. The time is 7:10.",
+      "The painting took 20 minutes. The start is 7:30. Twenty minutes later it is 7:50.",
+      "The school gates close at 7:50 in the morning, and prayer starts at 7:57. A student who comes after 7:57 is late."
+    ],
+    check: {
+      q: "The time was 3:00. Fifteen minutes later, what time is it?",
+      choices: ["3:15", "3:30", "4:00", "2:45"],
+      answer: 0,
+      why: "Add 15 minutes to 3:00. The minute hand moves to the 3, so the time is 3:15.",
+      retry: {
+        q: "The time was 7:00. The meal took 10 minutes. What time is it now?",
+        choices: ["7:10", "7:20", "6:50", "8:00"],
+        answer: 0,
+        why: "7:00 plus 10 minutes is 7:10. The minute hand points at the 2."
+      }
+    }
+  },
+  {
+    id: "exact",
+    kicker: "Exact minute",
+    title: "Reading the minute hand",
+    page: "boards-time/03-exact.svg",
+    alt: "Clock showing 7:17 with the counting method",
+    lines: [
+      "A clock has 60 small divisions. Twelve of them are the big numbers. From one number to the next is 5 minutes. Each small mark is 1 minute.",
+      "Read the hour hand first. It is the shorter hand. Look at the last number it has passed.",
+      "On this clock the hour hand has passed 7 and has not reached 8. The hour is 7.",
+      "Now the minute hand, the longer hand. It has passed the number 3. Count in fives from 12. The 1 is 5 minutes, the 2 is 10, and the 3 is 15.",
+      "Then count the small marks after the 3. They are 16 and 17.",
+      "The clock shows 7:17, which is 17 minutes past 7."
+    ],
+    check: {
+      q: "The hour hand has passed 7, and the minute hand is on the first small mark after the 3. What time is it?",
+      choices: ["7:15", "7:16", "7:17", "8:17"],
+      answer: 1,
+      why: "The number 3 means 15 minutes. One small mark after it is 16. The hour is still 7, so the time is 7:16.",
+      retry: {
+        q: "What does the number 3 on a clock mean for the minute hand?",
+        choices: ["3 minutes", "15 minutes", "30 minutes", "13 minutes"],
+        answer: 1,
+        why: "Each number is 5 minutes. 3 times 5 is 15, so the 3 means 15 minutes."
+      }
+    }
+  },
+  {
+    id: "to",
+    kicker: "Past and to",
+    title: "Minutes past and minutes to",
+    page: "boards-time/04-to.svg",
+    alt: "Clock showing 4:48, also 12 minutes to 5",
+    lines: [
+      "Look at the second worked clock. The hour hand has passed 4 and has not reached 5, so the hour is 4.",
+      "The minute hand has passed 9. The 9 means 45 minutes, because 9 times 5 is 45.",
+      "Count the small marks after 9: 46, 47, 48. The time is 4:48, or 48 minutes past 4.",
+      "We can also count forward to the next hour. From 48 minutes to 60 minutes is 12 minutes. So 4:48 is 12 minutes to 5.",
+      "Use the same idea for the exercise. Three minutes to 7 means the minute hand is three marks before 12, so the time is 6:57.",
+      "Eighteen minutes to 3 means 60 minus 18, which is 42 minutes. The hour is still 2, so the time is 2:42."
+    ],
+    check: {
+      q: "4:48 can also be said as",
+      choices: ["12 minutes past 5", "12 minutes to 5", "48 minutes to 4", "8 minutes to 5"],
+      answer: 1,
+      why: "4:48 is 48 minutes past 4. There are 12 minutes left until 5, so it is 12 minutes to 5.",
+      retry: {
+        q: "3 minutes to 7 is written as",
+        choices: ["7:03", "6:57", "7:57", "3:07"],
+        answer: 1,
+        why: "Three minutes before 7 is 6:57. The minute hand is three marks before 12."
+      }
+    }
+  },
+  {
+    id: "draw",
+    kicker: "Exercise 11.1",
+    title: "Hands on the clock",
+    page: "boards-time/05-draw.svg",
+    alt: "Six clocks for the times in Exercise 11.1",
+    lines: [
+      "Exercise 11.1 asks you to draw the hands. The long hand shows the minutes. The short hand shows the hour, and it moves a little as the minutes pass.",
+      "16 minutes past 9 is 9:16. The minute hand is one mark past the 3. The hour hand is just past 9.",
+      "26 minutes past 5 is 5:26. The minute hand is one mark past the 5.",
+      "6:23 means 23 minutes. The 4 is 20 minutes, so the minute hand is three marks past the 4.",
+      "4:57 is three minutes before 5. The minute hand is three marks before 12, and the hour hand is almost on the 5.",
+      "18 minutes to 3 is 2:42. The minute hand is two marks past the 8, because the 8 means 40 minutes."
+    ],
+    check: {
+      q: "16 minutes past 9 is",
+      choices: ["9:16", "8:16", "9:44", "16:09"],
+      answer: 0,
+      why: "Past means after the hour. 16 minutes after 9 is 9:16.",
+      retry: {
+        q: "18 minutes to 3 is",
+        choices: ["3:18", "2:18", "2:42", "3:42"],
+        answer: 2,
+        why: "18 minutes before 3 is 2:42. 60 minus 18 is 42."
+      }
+    }
+  },
+  {
+    id: "ampm",
+    kicker: "a.m. and p.m.",
+    title: "Morning and afternoon",
+    page: "boards-time/06-ampm.svg",
+    alt: "Timeline from midnight to noon to the next midnight",
+    lines: [
+      "A day has 24 hours. A clock only shows numbers up to 12, so the hour hand goes around twice.",
+      "The clock does not tell us whether it is morning or evening. We write a.m. or p.m.",
+      "a.m. means before noon. It covers the time from 12 midnight to 12 noon.",
+      "p.m. means after noon. It covers the time from 12 noon to the next 12 midnight.",
+      "If the coding class is in the morning, it is 8:00 a.m. If it is in the late evening, it is 8:00 p.m.",
+      "For 12 o'clock we do not write a.m. or p.m. We write 12 noon or 12 midnight.",
+      "The page has an animation QR code labelled ANM. Watch it beside the board."
+    ],
+    media: [{
+      afterLine: 6,
+      kind: "video",
+      title: "Animation · a.m. and p.m.",
+      url: video("cmm4ch11anm1")
+    }],
+    check: {
+      q: "School prayer at 7:57 in the morning is written as",
+      choices: ["7:57 p.m.", "7:57 a.m.", "19:57 a.m.", "12 noon"],
+      answer: 1,
+      why: "Morning is before noon, so 7:57 in the morning is 7:57 a.m.",
+      retry: {
+        q: "Dinner at 8 o'clock is",
+        choices: ["8:00 a.m.", "8:00 p.m.", "12 midnight", "8 noon"],
+        answer: 1,
+        why: "Dinner is after noon, so it is 8:00 p.m."
+      }
+    }
+  },
+  {
+    id: "day",
+    kicker: "Sort the day",
+    title: "a.m. or p.m. activities",
+    page: "boards-time/07-day.svg",
+    alt: "Activities sorted into a.m. and p.m.",
+    lines: [
+      "Getting ready for school is in the morning, so it is a.m. Breakfast at 7:30 is a.m.",
+      "Swimming in the evening is p.m. Cycling after school is p.m. Homework after school is p.m. Ice cream after dinner is p.m.",
+      "The book has an activity for this. It asks you to choose a.m. or p.m. Try it beside the board."
+    ],
+    media: [{
+      afterLine: 2,
+      kind: "activity",
+      title: "Activity · a.m. or p.m.",
+      url: activity("cmm4ch11int1")
+    }],
+    check: {
+      q: "Eating ice cream after dinner is",
+      choices: ["a.m.", "p.m."],
+      answer: 1,
+      why: "After dinner is in the evening, after noon, so it is p.m.",
+      retry: {
+        q: "Getting ready for school is",
+        choices: ["a.m.", "p.m."],
+        answer: 0,
+        why: "Getting ready for school happens in the morning, before noon."
+      }
+    }
+  }
+];
+
+const BANK = [
+  { id: "bed", topic: "add", q: "The time was 3:00. Making the bed took 15 minutes. What time is it now?", choices: ["3:15", "3:30", "4:15", "2:45"], answer: 0, why: "3:00 plus 15 minutes is 3:15." },
+  { id: "cycle", topic: "add2", q: "Cycling started at 10:00 and took 30 minutes. What time is it now?", choices: ["10:30", "10:00", "11:30", "9:30"], answer: 0, why: "10:00 plus 30 minutes is 10:30." },
+  { id: "meal", topic: "add3", q: "The meal started at 7:00 and took 10 minutes. What time is it now?", choices: ["7:10", "6:50", "7:20", "8:10"], answer: 0, why: "7:00 plus 10 minutes is 7:10." },
+  { id: "paint", topic: "add4", q: "Painting started at 7:30 and took 20 minutes. What time is it now?", choices: ["7:50", "8:00", "7:20", "8:30"], answer: 0, why: "7:30 plus 20 minutes is 7:50." },
+  { id: "num3", topic: "fives", q: "When the minute hand is on the 3, how many minutes is that?", choices: ["3", "15", "30", "13"], answer: 1, why: "Each number is 5 minutes. 3 times 5 is 15." },
+  { id: "num9", topic: "fives2", q: "When the minute hand is on the 9, how many minutes is that?", choices: ["9", "19", "45", "55"], answer: 2, why: "9 times 5 is 45 minutes." },
+  { id: "t717", topic: "read", q: "17 minutes past 7 is written as", choices: ["7:17", "17:07", "7:43", "6:17"], answer: 0, why: "The hour is 7 and the minutes are 17, so the time is 7:17." },
+  { id: "t448", topic: "read2", q: "48 minutes past 4 is written as", choices: ["4:48", "5:48", "4:12", "12:48"], answer: 0, why: "48 minutes after 4 is 4:48." },
+  { id: "to5", topic: "to", q: "4:48 is the same as", choices: ["12 minutes to 5", "48 minutes to 5", "12 minutes past 5", "8 minutes to 5"], answer: 0, why: "60 minus 48 is 12, so it is 12 minutes before 5." },
+  { id: "to7", topic: "to2", q: "3 minutes to 7 is", choices: ["7:03", "6:57", "7:57", "3:07"], answer: 1, why: "Three minutes before 7 is 6:57." },
+  { id: "to3", topic: "to3", q: "18 minutes to 3 is", choices: ["3:18", "2:42", "2:18", "3:42"], answer: 1, why: "18 minutes before 3 is 2:42." },
+  { id: "past9", topic: "past", q: "16 minutes past 9 is", choices: ["9:16", "8:16", "9:44", "16:09"], answer: 0, why: "16 minutes after 9 is 9:16." },
+  { id: "past5", topic: "past2", q: "26 minutes past 5 is", choices: ["5:26", "6:26", "4:26", "5:34"], answer: 0, why: "26 minutes after 5 is 5:26." },
+  { id: "hands", topic: "hands", q: "Which hand shows the minutes?", choices: ["The longer hand", "The shorter hand", "Both hands", "Neither hand"], answer: 0, why: "The longer hand is the minute hand. The shorter hand is the hour hand." },
+  { id: "am", topic: "ampm", q: "7:57 in the morning is", choices: ["7:57 a.m.", "7:57 p.m.", "12 noon", "19:57 a.m."], answer: 0, why: "Morning is before noon, so it is a.m." },
+  { id: "pm", topic: "ampm2", q: "An evening coding class at 8 o'clock is", choices: ["8:00 a.m.", "8:00 p.m.", "12 midnight", "8 noon"], answer: 1, why: "Evening is after noon, so it is 8:00 p.m." },
+  { id: "breakfast", topic: "ampm3", q: "Breakfast at 7:30 is", choices: ["7:30 a.m.", "7:30 p.m.", "12 noon", "7:30 midnight"], answer: 0, why: "Breakfast is in the morning, before noon." },
+  { id: "dinner", topic: "ampm4", q: "Dinner at 8 o'clock is", choices: ["8:00 a.m.", "8:00 p.m."], answer: 1, why: "Dinner is after noon, so it is p.m." },
+  { id: "noon", topic: "twelve", q: "12 o'clock in the middle of the day is called", choices: ["12 noon", "12 a.m.", "12 p.m. only", "12 midnight"], answer: 0, why: "The book writes 12 noon or 12 midnight, not a.m. or p.m." },
+  { id: "late", topic: "school", q: "Prayer starts at 7:57 a.m. A child who arrives at 8:00 a.m. is", choices: ["on time", "late", "early by an hour"], answer: 1, why: "8:00 is after 7:57, so the child is late." },
+  { id: "ready", topic: "sort", q: "Getting ready for school is", choices: ["a.m.", "p.m.", "12 midnight"], answer: 0, why: "Getting ready for school happens in the morning." },
+  { id: "ice", topic: "sort2", q: "Eating ice cream after dinner is", choices: ["a.m.", "p.m."], answer: 1, why: "After dinner is in the evening, so it is p.m." },
+  { id: "gap", topic: "diff", q: "How many minutes are there from 7:50 to 7:57?", choices: ["7 minutes", "17 minutes", "10 minutes", "3 minutes"], answer: 0, why: "57 minus 50 is 7 minutes." },
+  { id: "rounds", topic: "day", q: "How many times does the hour hand go around the clock in one day?", choices: ["1", "2", "12", "24"], answer: 1, why: "A day has 24 hours and the clock shows 12, so the hand goes around twice." }
+];
+
+const stepsEl = document.getElementById("steps");
+const pageEl = document.getElementById("page");
+const boardKicker = document.getElementById("board-kicker");
+const boardPage = document.getElementById("board-page");
+const boardFace = document.getElementById("board-face");
+const mediaEl = document.getElementById("media");
+const mediaTitle = document.getElementById("media-title");
+const mediaOpen = document.getElementById("media-open");
+const mediaFrame = document.getElementById("media-frame");
+const saidEl = document.getElementById("said");
+const controlsEl = document.getElementById("controls");
+const checkEl = document.getElementById("check");
+const testEl = document.getElementById("test");
+const modeLabel = document.getElementById("mode-label");
+const stepTitle = document.getElementById("step-title");
+const attemptPill = document.getElementById("attempt-pill");
+
+let stepIndex = 0;
+let lineIndex = 0;
+let lineBucket = "lines";
+let speaking = false;
+let paused = false;
+let token = 0;
+let mediaQueue = [];
+let checkState = null;
+let mode = "lesson";
+let paper = [];
+let attempts = loadAttempts();
+let seenIds = attempts.flatMap(a => a.ids || []);
+
+function loadAttempts() {
+  try { return JSON.parse(localStorage.getItem("cmm4-ch11-attempts") || "[]"); }
+  catch (e) { return []; }
+}
+function saveAttempts() {
+  localStorage.setItem("cmm4-ch11-attempts", JSON.stringify(attempts));
+  const last = attempts[attempts.length - 1];
+  attemptPill.textContent = last
+    ? "Last score " + last.correct + "/10 · pass mark 80%"
+    : "Pass mark 80%";
+}
+
+function shuffle(list) {
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function renderNav() {
+  stepsEl.innerHTML = "";
+  LESSON.forEach((step, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "step" + (i === stepIndex && mode === "lesson" ? " on" : "") + (i < stepIndex ? " done" : "");
+    b.innerHTML = "<small>" + step.kicker + "</small>" + step.title;
+    b.addEventListener("click", () => goStep(i));
+    stepsEl.appendChild(b);
+  });
+  const t = document.createElement("button");
+  t.type = "button";
+  t.className = "step" + (mode === "test" ? " on" : "");
+  t.innerHTML = "<small>Pass mark 80%</small>Chapter test";
+  t.addEventListener("click", () => startTest(false));
+  stepsEl.appendChild(t);
+}
+
+function hideMedia() {
+  mediaEl.classList.add("hidden");
+  boardFace.classList.remove("split");
+  mediaFrame.src = "about:blank";
+}
+
+function showMedia(item) {
+  boardFace.classList.add("split");
+  mediaEl.classList.remove("hidden");
+  mediaTitle.textContent = item.title;
+  mediaOpen.href = item.url;
+  mediaFrame.src = item.url;
+}
+
+function currentLines() {
+  const step = LESSON[stepIndex];
+  if (lineBucket === "after") return step.afterMedia || [];
+  return step.lines;
+}
+
+function showSentence() {
+  const lines = currentLines();
+  const step = LESSON[stepIndex];
+  modeLabel.textContent = "Teacher";
+  stepTitle.textContent = step.title;
+  boardKicker.textContent = "On the board";
+  boardPage.textContent = step.kicker;
+  pageEl.src = step.page;
+  pageEl.alt = step.alt;
+  saidEl.textContent = lines[lineIndex] || "";
+  checkEl.classList.add("hidden");
+  testEl.classList.add("hidden");
+  controlsEl.classList.remove("hidden");
+  renderControls();
+}
+
+function renderControls() {
+  const lines = currentLines();
+  controlsEl.innerHTML = "";
+  const status = document.createElement("div");
+  status.className = "history";
+  status.textContent = "Sentence " + (lineIndex + 1) + " of " + lines.length + (speaking ? " · speaking" : paused ? " · paused" : "");
+  controlsEl.appendChild(status);
+  const row = document.createElement("div");
+  row.className = "row";
+  row.appendChild(button(paused || !speaking ? "Speak" : "Pause", "primary", () => {
+    if (speaking && !paused) {
+      paused = true;
+      window.speechSynthesis && speechSynthesis.cancel();
+      speaking = false;
+      renderControls();
+    } else {
+      paused = false;
+      speakCurrent();
+    }
+  }));
+  row.appendChild(button("Again", "", () => { paused = false; speakCurrent(); }));
+  row.appendChild(button("Next sentence", "", () => nextSentence()));
+  controlsEl.appendChild(row);
+}
+
+function button(label, cls, fn) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "btn" + (cls ? " " + cls : "");
+  b.textContent = label;
+  b.addEventListener("click", fn);
+  return b;
+}
+
+function pickVoice() {
+  const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  return voices.find(v => v.lang === "en-IN")
+    || voices.find(v => /en-GB/i.test(v.lang) && /female|google|natural/i.test(v.name))
+    || voices.find(v => v.lang && v.lang.startsWith("en"))
+    || null;
+}
+
+function speak(text) {
+  const my = ++token;
+  if (!window.speechSynthesis) return Promise.resolve(my);
+  return new Promise(resolve => {
+    let settled = false;
+    const finish = () => {
+      if (settled) return;
+      settled = true;
+      resolve(my);
+    };
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.92;
+    u.lang = "en-IN";
+    const voice = pickVoice();
+    if (voice) u.voice = voice;
+    u.onend = finish;
+    u.onerror = finish;
+    speechSynthesis.resume();
+    speechSynthesis.speak(u);
+    setTimeout(finish, Math.min(28000, 1800 + text.length * 85));
+  });
+}
+
+async function speakCurrent() {
+  if (mode !== "lesson") return;
+  const lines = currentLines();
+  if (!lines[lineIndex]) return;
+  speaking = true;
+  paused = false;
+  showSentence();
+  const my = await speak(lines[lineIndex]);
+  speaking = false;
+  if (my !== token || paused || mode !== "lesson") return;
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.media) {
+    const due = step.media.filter(m => m.afterLine === lineIndex);
+    if (due.length) {
+      mediaQueue = due.slice();
+      openNextMedia();
+      return;
+    }
+  }
+  lineIndex += 1;
+  if (lineIndex >= lines.length) {
+    finishLines();
+    return;
+  }
+  speakCurrent();
+}
+
+function finishLines() {
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.afterMedia && !(step.media && step.media.length)) {
+    lineBucket = "after";
+    lineIndex = 0;
+    speakCurrent();
+    return;
+  }
+  if (step.check) {
+    openCheck(step.check, false);
+    return;
+  }
+  if (stepIndex === LESSON.length - 1) {
+    startTest(true);
+    return;
+  }
+  saidEl.textContent = "That part is complete. We move to the next page.";
+  controlsEl.innerHTML = "";
+  controlsEl.appendChild(button("Next page", "primary", () => goStep(stepIndex + 1)));
+}
+
+function openNextMedia() {
+  const item = mediaQueue.shift();
+  if (!item) {
+    const step = LESSON[stepIndex];
+    if (step.afterMedia) {
+      lineBucket = "after";
+      lineIndex = 0;
+      speakCurrent();
+      return;
+    }
+    lineIndex += 1;
+    const lines = currentLines();
+    if (lineIndex >= lines.length) finishLines();
+    else speakCurrent();
+    return;
+  }
+  token++;
+  speaking = false;
+  window.speechSynthesis && speechSynthesis.cancel();
+  showMedia(item);
+  saidEl.textContent = item.kind === "video"
+    ? "The video from the QR code is playing on the board, next to the page. Watch it, then we continue."
+    : "The book's activity is open on the board, next to the page. Try it, then we continue.";
+  controlsEl.innerHTML = "";
+  const row = document.createElement("div");
+  row.className = "row";
+  row.appendChild(button(mediaQueue.length ? "Next activity" : "Continue the lesson", "primary", () => {
+    if (!mediaQueue.length) hideMedia();
+    openNextMedia();
+  }));
+  controlsEl.appendChild(row);
+  speak(saidEl.textContent);
+}
+
+function nextSentence() {
+  token++;
+  speaking = false;
+  paused = false;
+  window.speechSynthesis && speechSynthesis.cancel();
+  const step = LESSON[stepIndex];
+  if (lineBucket === "lines" && step.media) {
+    const due = step.media.filter(m => m.afterLine === lineIndex);
+    if (due.length) {
+      mediaQueue = due.slice();
+      openNextMedia();
+      return;
+    }
+  }
+  lineIndex += 1;
+  const lines = currentLines();
+  if (lineIndex >= lines.length) finishLines();
+  else speakCurrent();
+}
+
+function openCheck(check, isRetry) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  speaking = false;
+  checkState = { check, isRetry, misses: 0 };
+  controlsEl.classList.add("hidden");
+  checkEl.classList.remove("hidden");
+  modeLabel.textContent = "Check";
+  saidEl.textContent = "Answer this before we turn the page.";
+  drawCheck();
+  speak(check.q);
+}
+
+function drawCheck() {
+  const { check } = checkState;
+  checkEl.innerHTML = "<h3>Check</h3>";
+  const q = document.createElement("p");
+  q.style.marginTop = "0";
+  q.textContent = check.q;
+  checkEl.appendChild(q);
+  const box = document.createElement("div");
+  box.className = "choices";
+  check.choices.forEach((choice, i) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.textContent = choice;
+    b.addEventListener("click", () => answerCheck(i, b, box));
+    box.appendChild(b);
+  });
+  checkEl.appendChild(box);
+}
+
+function answerCheck(i, buttonEl, box) {
+  const state = checkState;
+  if (i === state.check.answer) {
+    buttonEl.classList.add("good");
+    const note = document.createElement("div");
+    note.className = "note good";
+    note.textContent = "Yes. " + state.check.why;
+    checkEl.appendChild(note);
+    [...box.children].forEach(el => el.disabled = true);
+    const row = document.createElement("div");
+    row.className = "row";
+    row.style.marginTop = "10px";
+    const last = stepIndex === LESSON.length - 1;
+    row.appendChild(button(last ? "Start the test" : "Next page", "primary", () => {
+      checkEl.classList.add("hidden");
+      controlsEl.classList.remove("hidden");
+      if (last) startTest(true);
+      else goStep(stepIndex + 1);
+    }));
+    checkEl.appendChild(row);
+    speak("Yes. " + state.check.why);
+    return;
+  }
+  state.misses += 1;
+  buttonEl.classList.add("bad");
+  let note = checkEl.querySelector(".note");
+  if (!note) {
+    note = document.createElement("div");
+    checkEl.appendChild(note);
+  }
+  note.className = "note bad";
+  note.textContent = state.check.why;
+  speak(state.check.why);
+  if (state.misses >= 2 && state.check.retry && !state.isRetry) {
+    const again = document.createElement("div");
+    again.className = "row";
+    again.style.marginTop = "10px";
+    again.appendChild(button("Try a second question", "primary", () => openCheck(state.check.retry, true)));
+    checkEl.appendChild(again);
+  }
+}
+
+function goStep(i) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  mode = "lesson";
+  stepIndex = i;
+  lineIndex = 0;
+  lineBucket = "lines";
+  mediaQueue = [];
+  paused = false;
+  hideMedia();
+  checkEl.classList.add("hidden");
+  testEl.classList.add("hidden");
+  controlsEl.classList.remove("hidden");
+  renderNav();
+  showSentence();
+  speakCurrent();
+}
+
+function makePaper() {
+  const fresh = BANK.filter(q => !seenIds.includes(q.id));
+  let pool = fresh.length >= 10 ? fresh : BANK.slice();
+  pool = shuffle(pool);
+  const paper = [];
+  const topics = new Set();
+  pool.forEach(q => {
+    if (paper.length >= 10) return;
+    if (topics.has(q.topic)) return;
+    topics.add(q.topic);
+    paper.push(q);
+  });
+  pool.forEach(q => {
+    if (paper.length >= 10) return;
+    if (!paper.includes(q)) paper.push(q);
+  });
+  return shuffle(paper).slice(0, 10);
+}
+
+function startTest(speakIntro) {
+  token++;
+  window.speechSynthesis && speechSynthesis.cancel();
+  hideMedia();
+  mode = "test";
+  const review = LESSON[LESSON.length - 1];
+  pageEl.src = review.page;
+  pageEl.alt = review.alt;
+  boardKicker.textContent = "On the board";
+  boardPage.textContent = "Chapter review";
+  modeLabel.textContent = "Test";
+  stepTitle.textContent = "Ten questions · pass mark 80%";
+  saidEl.textContent = "The chapter review stays on the board. Answer all ten questions, then I will mark them. You need 8 correct answers.";
+  controlsEl.classList.add("hidden");
+  checkEl.classList.add("hidden");
+  testEl.classList.remove("hidden");
+  paper = makePaper();
+  renderNav();
+  drawPaper(null);
+  if (speakIntro) speak(saidEl.textContent);
+}
+
+function drawPaper(result) {
+  testEl.innerHTML = "";
+  const h = document.createElement("h3");
+  h.textContent = result ? "Result" : "Chapter test";
+  testEl.appendChild(h);
+  if (!result) {
+    const intro = document.createElement("p");
+    intro.textContent = "Attempt " + (attempts.length + 1) + ". Choose one answer for each question.";
+    testEl.appendChild(intro);
+  } else {
+    const score = document.createElement("p");
+    score.className = "scoreline";
+    score.textContent = result.correct + " / 10 · " + result.percent + "%";
+    testEl.appendChild(score);
+    const verdict = document.createElement("div");
+    verdict.className = "note " + (result.passed ? "good" : "bad");
+    verdict.textContent = result.passed
+      ? "Passed. The mark is at least 80%. This chapter test is complete."
+      : "Not yet. The pass mark is 80%, so 8 out of 10. Read the corrections, then take a new test.";
+    testEl.appendChild(verdict);
+  }
+  if (attempts.length) {
+    const hist = document.createElement("div");
+    hist.className = "history";
+    attempts.forEach((a, n) => {
+      const d = document.createElement("div");
+      d.textContent = "Attempt " + (n + 1) + ": " + a.correct + "/10 (" + a.percent + "%) " + (a.passed ? "passed" : "below the pass mark");
+      hist.appendChild(d);
+    });
+    testEl.appendChild(hist);
+  }
+  paper.forEach((q, index) => {
+    const block = document.createElement("div");
+    block.className = "q";
+    const p = document.createElement("p");
+    p.textContent = (index + 1) + ". " + q.q;
+    block.appendChild(p);
+    q.choices.forEach((choice, ci) => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = q.id;
+      input.value = String(ci);
+      if (result) input.disabled = true;
+      if (result && result.picks[q.id] === ci) input.checked = true;
+      label.appendChild(input);
+      const span = document.createElement("span");
+      span.textContent = choice;
+      if (result && ci === q.answer) span.style.fontWeight = "680";
+      label.appendChild(span);
+      block.appendChild(label);
+    });
+    if (result && result.picks[q.id] !== q.answer) {
+      const why = document.createElement("div");
+      why.className = "note bad";
+      const chosen = result.picks[q.id];
+      why.textContent = (chosen == null ? "No answer was chosen. " : "The chosen answer was not right. ") + q.why;
+      block.appendChild(why);
+    } else if (result) {
+      const why = document.createElement("div");
+      why.className = "note good";
+      why.textContent = "Correct. " + q.why;
+      block.appendChild(why);
+    }
+    testEl.appendChild(block);
+  });
+  const row = document.createElement("div");
+  row.className = "row";
+  if (!result) {
+    row.appendChild(button("Mark the test", "primary", gradePaper));
+    row.appendChild(button("Read question 1 aloud", "", () => speak("Question 1. " + paper[0].q)));
+  } else if (!result.passed) {
+    row.appendChild(button("Take the next test", "primary", () => startTest(true)));
+  } else {
+    row.appendChild(button("Hear the result", "", () => speak("You passed with " + result.correct + " out of 10. That is " + result.percent + " percent.")));
+  }
+  testEl.appendChild(row);
+}
+
+function gradePaper() {
+  const picks = {};
+  let correct = 0;
+  paper.forEach(q => {
+    const selected = testEl.querySelector("input[name='" + q.id + "']:checked");
+    const value = selected ? Number(selected.value) : null;
+    picks[q.id] = value;
+    if (value === q.answer) correct += 1;
+  });
+  const percent = Math.round((correct / paper.length) * 100);
+  const result = { correct, percent, passed: percent >= 80, picks, ids: paper.map(q => q.id) };
+  attempts.push({ correct, percent, passed: result.passed, ids: result.ids });
+  seenIds = seenIds.concat(result.ids);
+  saveAttempts();
+  drawPaper(result);
+  const verdict = result.passed
+    ? "You scored " + correct + " out of 10, which is " + percent + " percent. You have passed."
+    : "You scored " + correct + " out of 10, which is " + percent + " percent. The pass mark is 80 percent. We will take another test.";
+  saidEl.textContent = verdict;
+  speak(verdict);
+}
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  document.getElementById("gate").classList.add("hidden");
+  saveAttempts();
+  renderNav();
+  goStep(0);
+});
+
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = () => pickVoice();
+  speechSynthesis.getVoices();
+}
+saveAttempts();
+renderNav();
+</script>
+</body>
+</html>

@@ -26,8 +26,8 @@ jobs:
       - name: Prepare site
         run: |
           mkdir _site
-          cp index.html README.md .nojekyll _site/
-          cp -r boards _site/boards
+          cp index.html fractions.html time.html README.md .nojekyll _site/
+          cp -r boards boards-time _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

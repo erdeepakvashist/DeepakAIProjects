@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1020" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="1020" fill="#f6f1e6"/>
+
+<text x="48" y="64" font-size="34" fill="#9c4221" font-weight="700">Past and to</text>
+<circle cx="260" cy="340" r="150" fill="#f6d56b" stroke="#241c14" stroke-width="4"/>
+<text x="321.0" y="240.3" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">1</text>
+<text x="365.7" y="285.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">2</text>
+<text x="382.0" y="346.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">3</text>
+<text x="365.7" y="407.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">4</text>
+<text x="321.0" y="451.7" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">5</text>
+<text x="260.0" y="468.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">6</text>
+<text x="199.0" y="451.7" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">7</text>
+<text x="154.3" y="407.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">8</text>
+<text x="138.0" y="346.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">9</text>
+<text x="154.3" y="285.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">10</text>
+<text x="199.0" y="240.3" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">11</text>
+<text x="260.0" y="224.0" text-anchor="middle" font-size="20" font-family="Georgia, serif" fill="#241c14">12</text>
+<line x1="260" y1="340" x2="304.1" y2="400.7" stroke="#241c14" stroke-width="7" stroke-linecap="round"/>
+<line x1="260" y1="340" x2="154.4" y2="305.7" stroke="#9c4221" stroke-width="4" stroke-linecap="round"/>
+<circle cx="260" cy="340" r="6" fill="#241c14"/>
+<text x="260" y="532" text-anchor="middle" font-size="24" font-family="Georgia, serif" fill="#241c14">4:48</text>
+<text x="500" y="260" font-size="26">Hour hand has passed 4,</text>
+<text x="500" y="310" font-size="26">not yet 5.</text>
+<text x="500" y="380" font-size="26">9 means 45 minutes.</text>
+<text x="500" y="430" font-size="26">Then 46, 47, 48.</text>
+<text x="48" y="620" font-size="30">4:48 is 48 minutes past 4.</text>
+<text x="48" y="690" font-size="30">It is also 12 minutes to 5.</text>
+<text x="48" y="780" font-size="26" fill="#5c5146">60 − 48 = 12 minutes left until 5.</text>
+<text x="48" y="880" font-size="28">3 minutes to 7 is 6:57.</text>
+<text x="48" y="940" font-size="28">18 minutes to 3 is 2:42.</text>
+
+</svg>
