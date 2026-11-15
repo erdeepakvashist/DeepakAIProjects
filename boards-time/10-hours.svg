@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 740" font-family="Georgia, serif">
+<rect width="900" height="740" fill="#f6f1e6"/>
+<text x="48" y="60" font-size="32" fill="#9c4221" font-weight="700">12-hour and 24-hour clocks</text>
+<text x="48" y="120" font-size="26">A 12-hour clock uses 1 to 12 and goes around twice.</text>
+<text x="48" y="180" font-size="26">A 24-hour clock shows the whole day in one round.</text>
+<text x="48" y="260" font-size="28">Midnight to noon: 00, 01, 02, ... 11</text>
+<text x="48" y="320" font-size="28">After noon: 12, 13, 14, ... 23</text>
+<rect x="48" y="380" width="804" height="200" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="450" font-size="30">1:30 a.m. = 01:30 hours</text>
+<text x="72" y="520" font-size="30">1:30 p.m. = 13:30 hours</text>
+<text x="48" y="660" font-size="24" fill="#5c5146">Hours first, then minutes. Four digits: HH:MM.</text>
+</svg>

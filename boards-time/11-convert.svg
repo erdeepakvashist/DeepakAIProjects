@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 820" font-family="Georgia, serif">
+<rect width="900" height="820" fill="#f6f1e6"/>
+<text x="48" y="60" font-size="32" fill="#9c4221" font-weight="700">Converting the clocks</text>
+<text x="48" y="130" font-size="26">Less than 12: it is a.m.</text>
+<text x="72" y="190" font-size="28">09:10 hours = 9:10 a.m.</text>
+<text x="48" y="270" font-size="26">More than 12: subtract 12, and it is p.m.</text>
+<text x="72" y="330" font-size="28">20:15 hours = 8:15 p.m.</text>
+<text x="72" y="380" font-size="24" fill="#5c5146">20 minus 12 is 8.</text>
+<text x="48" y="470" font-size="26">12:00 hours is 12 noon.</text>
+<text x="48" y="530" font-size="26">00:00 hours is 12 midnight.</text>
+<text x="48" y="620" font-size="28">2:00 p.m. = 14:00 hours</text>
+<text x="48" y="680" font-size="28">10:00 p.m. = 22:00 hours</text>
+<text x="48" y="740" font-size="28">7:00 a.m. = 07:00 hours</text>
+</svg>

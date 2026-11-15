@@ -344,7 +344,7 @@
 <div class="gate" id="gate">
   <article>
     <h2>Class is ready.</h2>
-    <p>I will teach the first part of Chapter 11, Time. The board shows each idea. The a.m. and p.m. animation from the book plays beside the board.</p>
+    <p>I will teach Chapter 11, Time, through the 24-hour clock. The board shows each idea. The book videos and activities play beside the board.</p>
     <p>I will stop for a short question after each idea. At the end there is a test. The pass mark is 8 out of 10, which is 80%. A lower score means a new test, until the mark is high enough.</p>
     <p>Turn the sound on. The lesson is spoken.</p>
     <button class="btn primary" id="start-btn" type="button">Start the lesson</button>
@@ -370,8 +370,8 @@ const LESSON = [
     lines: [
       "Good afternoon. Open Chapter 11, Time.",
       "Shilpa can remember that school prayer starts at 7:57, but she cannot yet read that time on a clock. That is our work today.",
-      "We will read a clock to the exact minute, say a time as minutes past or minutes to, and decide whether a time is a.m. or p.m.",
-      "The chapter also has the 24-hour clock, the calendar, dates, leap years, and a timeline. We will take those when those pages are here.",
+      "We will read a clock to the exact minute, say a time as minutes past or minutes to, decide a.m. or p.m., and change a time into the 24-hour clock.",
+      "The calendar, dates, leap years, and the timeline come when those pages are here.",
       "At the end there is a test. You need 8 out of 10 to pass."
     ]
   },
@@ -546,6 +546,127 @@ const LESSON = [
         why: "Getting ready for school happens in the morning, before noon."
       }
     }
+  },
+  {
+    id: "exercise2",
+    kicker: "Exercise 11.2",
+    title: "Say a.m. or p.m., then read the clock",
+    page: "boards-time/08-exercise.svg",
+    alt: "Exercise 11.2 a.m. and p.m. clocks",
+    lines: [
+      "Exercise 11.2. First use the words in the sentence.",
+      "A movie after dinner is p.m. Eating idlis for breakfast is a.m. A campfire is in the evening, so it is p.m. Waking up in the morning is a.m.",
+      "Now read the clocks. Rohan flew the kite after school. The minute hand is on the 8, so it is 40 minutes. The hour hand is between 4 and 5. After school means p.m. The time is 4:40 p.m.",
+      "Rita went for a walk before school. Both hands meet at 6, so it is 6:00. Before school means a.m. The time is 6:00 a.m.",
+      "John and his sister ate ice cream after dinner. The minute hand is on the 8 and the hour hand is between 6 and 7. After dinner means p.m. The time is 6:40 p.m.",
+      "Sia's music class clock shows the minute hand on the 6 and the hour hand between 4 and 5, so the clock says 4:30. Use the words in her sentence to choose a.m. or p.m."
+    ],
+    check: {
+      q: "Rohan flew the kite after school at",
+      choices: ["4:40 a.m.", "4:40 p.m.", "8:20 p.m.", "5:40 p.m."],
+      answer: 1,
+      why: "The minute hand on the 8 means 40 minutes, the hour is 4, and after school is p.m.",
+      retry: {
+        q: "Rita's walk before school is at",
+        choices: ["6:00 a.m.", "6:00 p.m.", "12:00 a.m.", "12:30 a.m."],
+        answer: 0,
+        why: "The hands show 6:00, and before school is in the morning, so it is 6:00 a.m."
+      }
+    }
+  },
+  {
+    id: "zones",
+    kicker: "Maths Connect",
+    title: "Why time is different around the world",
+    page: "boards-time/09-zones.svg",
+    alt: "Time zones and the India and New York example",
+    lines: [
+      "Different places can have different times because the Earth rotates.",
+      "The Earth takes 24 hours to complete one rotation. That is why the world is divided into 24 time zones.",
+      "When it is morning in one place, it can be night in another.",
+      "The page gives one finished pair. Reema goes to school at 8:00 a.m. in India. At that same moment her cousin in New York is fast asleep, and it is 10:30 p.m. there.",
+      "The imaginary line the Earth rotates on is called its axis.",
+      "The page also asks for Rohan's skating time when it is 11:30 a.m. in London, and for a time in Canada when it is 7:00 a.m. in India. Those answers need a time-zone chart. I will not guess them."
+    ],
+    check: {
+      q: "How many time zones does the page say the world has?",
+      choices: ["12", "24", "60", "7"],
+      answer: 1,
+      why: "The Earth rotates once in 24 hours, so the world has 24 time zones.",
+      retry: {
+        q: "When it is 8:00 a.m. in India, the page says it is 10:30 p.m. in",
+        choices: ["London", "New York", "Canada", "India"],
+        answer: 1,
+        why: "Reema's cousin in New York is asleep at 10:30 p.m. when it is 8:00 a.m. in India."
+      }
+    }
+  },
+  {
+    id: "hours24",
+    kicker: "24-hour clock",
+    title: "A clock that shows the whole day",
+    page: "boards-time/10-hours.svg",
+    alt: "12-hour clock compared with the 24-hour clock",
+    lines: [
+      "A 12-hour clock has numbers from 1 to 12. It goes around twice to finish one day.",
+      "From midnight to noon we write a.m. From noon to midnight we write p.m.",
+      "A 24-hour clock shows the whole day in one round. You see these clocks at airports and railway stations. They do not write a.m. or p.m.",
+      "The first 12 hours, up to noon, are written 1, 2, 3, up to 12. The next hour is 13, then 14, and so on, until 24 or 00.",
+      "The time uses four digits. The first two are the hours and the next two are the minutes.",
+      "1:30 p.m. is 13:30 hours. 1:30 a.m. is 01:30 hours.",
+      "Here is the video for this page."
+    ],
+    media: [{
+      afterLine: 6,
+      kind: "video",
+      title: "Video · 24-hour clock",
+      url: video("cmm4ch11svid1")
+    }],
+    check: {
+      q: "1:30 p.m. on a 24-hour clock is",
+      choices: ["01:30", "13:30", "12:30", "15:30"],
+      answer: 1,
+      why: "After noon we add 12 to the hour. 1 plus 12 is 13, so 1:30 p.m. is 13:30.",
+      retry: {
+        q: "1:30 a.m. on a 24-hour clock is",
+        choices: ["13:30", "01:30", "12:30", "15:30"],
+        answer: 1,
+        why: "1:30 a.m. is before noon, so the hour stays 1 and is written 01:30."
+      }
+    }
+  },
+  {
+    id: "convert",
+    kicker: "Conversion",
+    title: "Change between the two clocks",
+    page: "boards-time/11-convert.svg",
+    alt: "Rules for changing 24-hour time into 12-hour time",
+    lines: [
+      "Rule 1. If the first two digits are less than 12, the time is before noon, so use a.m. 09:10 hours is 9:10 a.m.",
+      "Rule 2. If the first two digits are more than 12, subtract 12. That hour is after noon, so use p.m. 20:15 hours is 8:15 p.m., because 20 minus 12 is 8.",
+      "Twelve itself is the noon hour. 12:00 hours is 12 noon. 00:00 hours is 12 midnight.",
+      "Going the other way, a morning time keeps its hour and we write a zero in front when the hour is one digit. 7:00 a.m. is 07:00 hours.",
+      "An afternoon time adds 12. 2:00 p.m. is 14:00 hours. 4:00 p.m. is 16:00 hours. 10:00 p.m. is 22:00 hours.",
+      "Try the activity. Change each 12-hour time into the 24-hour clock."
+    ],
+    media: [{
+      afterLine: 5,
+      kind: "activity",
+      title: "Activity · change to the 24-hour clock",
+      url: activity("cmm4ch11int2")
+    }],
+    check: {
+      q: "20:15 hours is",
+      choices: ["8:15 a.m.", "8:15 p.m.", "10:15 p.m.", "20:15 p.m."],
+      answer: 1,
+      why: "20 is more than 12. 20 minus 12 is 8, and the time is after noon, so it is 8:15 p.m.",
+      retry: {
+        q: "2:00 p.m. on a 24-hour clock is",
+        choices: ["02:00", "12:00", "14:00", "22:00"],
+        answer: 2,
+        why: "2 plus 12 is 14, so 2:00 p.m. is 14:00 hours."
+      }
+    }
   }
 ];
 
@@ -573,7 +694,25 @@ const BANK = [
   { id: "ready", topic: "sort", q: "Getting ready for school is", choices: ["a.m.", "p.m.", "12 midnight"], answer: 0, why: "Getting ready for school happens in the morning." },
   { id: "ice", topic: "sort2", q: "Eating ice cream after dinner is", choices: ["a.m.", "p.m."], answer: 1, why: "After dinner is in the evening, so it is p.m." },
   { id: "gap", topic: "diff", q: "How many minutes are there from 7:50 to 7:57?", choices: ["7 minutes", "17 minutes", "10 minutes", "3 minutes"], answer: 0, why: "57 minus 50 is 7 minutes." },
-  { id: "rounds", topic: "day", q: "How many times does the hour hand go around the clock in one day?", choices: ["1", "2", "12", "24"], answer: 1, why: "A day has 24 hours and the clock shows 12, so the hand goes around twice." }
+  { id: "rounds", topic: "day", q: "How many times does the hour hand go around the clock in one day?", choices: ["1", "2", "12", "24"], answer: 1, why: "A day has 24 hours and the clock shows 12, so the hand goes around twice." },
+  { id: "movie", topic: "ex2", q: "Watching a movie after dinner is", choices: ["a.m.", "p.m."], answer: 1, why: "After dinner is in the evening, so it is p.m." },
+  { id: "idli", topic: "ex2b", q: "Eating idlis for breakfast is", choices: ["a.m.", "p.m."], answer: 0, why: "Breakfast is in the morning, so it is a.m." },
+  { id: "camp", topic: "ex2c", q: "Enjoying a campfire is", choices: ["a.m.", "p.m."], answer: 1, why: "A campfire is in the evening, after noon, so it is p.m." },
+  { id: "wake", topic: "ex2d", q: "Waking up in the morning is", choices: ["a.m.", "p.m."], answer: 0, why: "The sentence says in the morning, so it is a.m." },
+  { id: "kite", topic: "exclock", q: "Rohan flew the kite after school. The clock shows 40 minutes past 4. The time is", choices: ["4:40 a.m.", "4:40 p.m.", "8:20 p.m.", "4:08 p.m."], answer: 1, why: "After school is p.m., and 40 minutes past 4 is 4:40 p.m." },
+  { id: "walk", topic: "exclock2", q: "Rita walked before school at 6:00. The time is", choices: ["6:00 p.m.", "6:00 a.m.", "12:00 a.m.", "6:30 a.m."], answer: 1, why: "Before school is morning, so 6:00 is 6:00 a.m." },
+  { id: "zones24", topic: "zone", q: "The world has how many time zones?", choices: ["12", "24", "60", "365"], answer: 1, why: "The Earth rotates once in 24 hours, so there are 24 time zones." },
+  { id: "ny", topic: "zone2", q: "When it is 8:00 a.m. in India, the page says New York is at", choices: ["8:00 a.m.", "10:30 a.m.", "10:30 p.m.", "7:00 a.m."], answer: 2, why: "Reema's cousin in New York is asleep at 10:30 p.m." },
+  { id: "axis", topic: "research", q: "The imaginary line the Earth rotates on is called the", choices: ["equator", "axis", "minute hand", "calendar"], answer: 1, why: "Earth rotates on its axis." },
+  { id: "spin", topic: "research2", q: "How long does the Earth take for one rotation?", choices: ["12 hours", "24 hours", "60 minutes", "7 days"], answer: 1, why: "One rotation of the Earth takes 24 hours, which is one day." },
+  { id: "h1330", topic: "h24", q: "1:30 p.m. in 24-hour time is", choices: ["01:30", "13:30", "12:30", "15:30"], answer: 1, why: "Add 12 to a p.m. hour. 1 plus 12 is 13, so it is 13:30." },
+  { id: "h0130", topic: "h24b", q: "1:30 a.m. in 24-hour time is", choices: ["13:30", "01:30", "00:30", "12:30"], answer: 1, why: "A morning time before noon keeps the hour, written as 01:30." },
+  { id: "h2015", topic: "rule", q: "20:15 hours is the same as", choices: ["8:15 a.m.", "8:15 p.m.", "10:15 p.m.", "20:15 a.m."], answer: 1, why: "20 minus 12 is 8, and it is after noon, so 8:15 p.m." },
+  { id: "h0910", topic: "rule2", q: "09:10 hours is the same as", choices: ["9:10 p.m.", "9:10 a.m.", "21:10", "10:09 a.m."], answer: 1, why: "09 is less than 12, so it is before noon: 9:10 a.m." },
+  { id: "h1400", topic: "rule3", q: "2:00 p.m. in 24-hour time is", choices: ["02:00", "14:00", "12:00", "22:00"], answer: 1, why: "2 plus 12 is 14, so 2:00 p.m. is 14:00 hours." },
+  { id: "h2200", topic: "rule4", q: "10:00 p.m. in 24-hour time is", choices: ["10:00", "12:00", "20:00", "22:00"], answer: 3, why: "10 plus 12 is 22, so 10:00 p.m. is 22:00 hours." },
+  { id: "noon24", topic: "noon24", q: "12:00 hours is", choices: ["12 midnight", "12 noon", "12:00 a.m.", "00:00"], answer: 1, why: "12:00 hours is the middle of the day, 12 noon." },
+  { id: "mid24", topic: "mid24", q: "00:00 hours is", choices: ["12 noon", "12 midnight", "12:00 p.m.", "1:00 a.m."], answer: 1, why: "00:00 hours is the start of the day, 12 midnight." }
 ];
 
 const stepsEl = document.getElementById("steps");

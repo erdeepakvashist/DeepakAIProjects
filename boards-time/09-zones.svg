@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" font-family="Georgia, serif">
+<rect width="900" height="700" fill="#f6f1e6"/>
+<text x="48" y="60" font-size="32" fill="#9c4221" font-weight="700">Time zones</text>
+<text x="48" y="120" font-size="26">Earth rotates once in 24 hours.</text>
+<text x="48" y="170" font-size="26">The world has 24 time zones.</text>
+<text x="48" y="230" font-size="26">Morning in one place can be night in another.</text>
+<rect x="48" y="280" width="804" height="160" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="340" font-size="26">India: Reema goes to school at 8:00 a.m.</text>
+<text x="72" y="395" font-size="26">New York: her cousin is asleep at 10:30 p.m.</text>
+<text x="48" y="510" font-size="26">The imaginary line Earth rotates on is its axis.</text>
+<text x="48" y="580" font-size="24" fill="#5c5146">The page also asks for a time in London's pair</text>
+<text x="48" y="620" font-size="24" fill="#5c5146">and a time in Canada. Use a time-zone chart for those.</text>
+</svg>
