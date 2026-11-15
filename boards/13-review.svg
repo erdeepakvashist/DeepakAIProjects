@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 920" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="920" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="36" fill="#9c4221" font-weight="700">Chapter review</text>
+<text x="48" y="160" font-size="30">Numerator 1  →  unit fraction</text>
+<text x="48" y="230" font-size="30">Same denominator  →  like fractions</text>
+<text x="48" y="300" font-size="30">8/12 − 3/12 = 5/12</text>
+<text x="48" y="370" font-size="30">1/12 is smaller than 3/12</text>
+<text x="48" y="440" font-size="30">7/9 + 2/9 = 9/9 = 1 whole</text>
+<text x="48" y="530" font-size="28" fill="#9c4221" font-weight="700">Odd one out</text>
+<text x="48" y="590" font-size="28">1/9, 3/8, 7/9, 3/9, 2/9  →  3/8</text>
+<text x="48" y="650" font-size="28">2/3, 14/21, 12/18, 3/15, 20/30  →  3/15</text>
+<rect x="48" y="720" width="804" height="140" rx="14" fill="#e7f3ea"/>
+<text x="72" y="780" font-size="30" fill="#1f6b43" font-weight="700">Test: 10 questions</text>
+<text x="72" y="825" font-size="28" fill="#1f6b43">Pass mark is 8 out of 10.</text>
+
+</svg>

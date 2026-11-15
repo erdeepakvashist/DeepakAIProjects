@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1000" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="1000" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="34" fill="#9c4221" font-weight="700">Improper and mixed numbers</text>
+<rect x="48" y="120" width="804" height="280" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="80" y="180" font-size="28" fill="#5c5146">Improper to mixed: divide</text>
+<text x="80" y="250" font-size="40">46 ÷ 5 = 9 remainder 1</text>
+<text x="80" y="330" font-size="40">46/5  =  9 and 1/5</text>
+<rect x="48" y="440" width="804" height="320" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="80" y="500" font-size="28" fill="#5c5146">Mixed to improper</text>
+<text x="80" y="570" font-size="28">(whole × denominator) + numerator</text>
+<text x="80" y="640" font-size="28">all over the same denominator</text>
+<text x="80" y="720" font-size="36">5 and 4/7</text>
+<text x="80" y="790" font-size="32">(7 × 5) + 4 = 39, so 39/7</text>
+<text x="48" y="860" font-size="32">6 and 1/2  =  13/2</text>
+<text x="48" y="930" font-size="26" fill="#5c5146">2 × 6 = 12, and 12 + 1 = 13.</text>
+
+</svg>

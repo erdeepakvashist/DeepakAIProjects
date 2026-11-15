@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="1100" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="36" fill="#9c4221" font-weight="700">Equivalent fractions</text>
+<text x="48" y="120" font-size="26" fill="#5c5146">Same amount. Different names.</text>
+<circle cx="220" cy="340" r="120" fill="#f7f1e6" stroke="#241c14" stroke-width="4"/>
+<line x1="220" y1="220" x2="220" y2="460" stroke="#241c14" stroke-width="3"/>
+<line x1="100" y1="340" x2="340" y2="340" stroke="#241c14" stroke-width="3"/>
+<path d="M220 340 L220 220 A120 120 0 0 1 340 340 Z" fill="#2f6b45"/>
+<text x="220" y="500" text-anchor="middle" font-size="32">1/4</text>
+<circle cx="640" cy="340" r="120" fill="#f7f1e6" stroke="#241c14" stroke-width="4"/>
+<g stroke="#241c14" stroke-width="3">
+<line x1="640" y1="220" x2="640" y2="460"/>
+<line x1="520" y1="340" x2="760" y2="340"/>
+<line x1="555" y1="255" x2="725" y2="425"/>
+<line x1="555" y1="425" x2="725" y2="255"/>
+</g>
+<path d="M640 340 L640 220 A120 120 0 0 1 725 255 Z" fill="#2f6b45"/>
+<path d="M640 340 L725 255 A120 120 0 0 1 760 340 Z" fill="#2f6b45"/>
+<text x="640" y="500" text-anchor="middle" font-size="32">2/8</text>
+<text x="450" y="340" text-anchor="middle" font-size="40">=</text>
+<rect x="48" y="560" width="804" height="250" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="80" y="630" font-size="28">Multiply top and bottom by the same number.</text>
+<text x="80" y="700" font-size="36">1/2  ×  2/2  =  2/4</text>
+<text x="80" y="770" font-size="28">Divide top and bottom by the same number.</text>
+<text x="48" y="900" font-size="32">2/8  ÷  2  =  1/4</text>
+<text x="48" y="980" font-size="28" fill="#5c5146">Exercise check: the green strip is 1/6.</text>
+<text x="48" y="1030" font-size="28" fill="#5c5146">The diamond 2/8 simplifies to 1/4.</text>
+
+</svg>

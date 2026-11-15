@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1280" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="1280" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="36" fill="#9c4221" font-weight="700" text-anchor="start">Numerator and denominator</text>
+<polygon points="120,180 250,420 20,420" fill="#f7f1e6" stroke="#241c14" stroke-width="4"/>
+<line x1="70" y1="300" x2="200" y2="300" stroke="#241c14" stroke-width="3"/>
+<line x1="120" y1="180" x2="135" y2="420" stroke="#241c14" stroke-width="3"/>
+<polygon points="120,180 185,300 70,300" fill="#2f6b45"/>
+<text x="40" y="470" font-size="26" fill="#241c14" font-weight="400" text-anchor="start">1 of 4 equal parts  =  1/4</text>
+<line x1="470" y1="250" x2="760" y2="250" stroke="#241c14" stroke-width="6"/>
+<text x="615" y="220" font-size="64" fill="#9c4221" font-weight="700" text-anchor="middle">3</text>
+<text x="615" y="330" font-size="64" fill="#245f86" font-weight="700" text-anchor="middle">5</text>
+<text x="500" y="180" font-size="22" fill="#9c4221" font-weight="400" text-anchor="start">numerator — parts we mean</text>
+<text x="500" y="400" font-size="22" fill="#245f86" font-weight="400" text-anchor="start">denominator — equal parts</text>
+<text x="48" y="580" font-size="30" fill="#241c14" font-weight="700" text-anchor="start">8 marbles: 3 red, 5 green</text>
+<circle cx="80" cy="700" r="28" fill="#c45b4a"/><circle cx="170" cy="700" r="28" fill="#c45b4a"/><circle cx="260" cy="700" r="28" fill="#c45b4a"/><circle cx="350" cy="700" r="28" fill="#2f6b45"/><circle cx="440" cy="700" r="28" fill="#2f6b45"/><circle cx="530" cy="700" r="28" fill="#2f6b45"/><circle cx="620" cy="700" r="28" fill="#2f6b45"/><circle cx="710" cy="700" r="28" fill="#2f6b45"/>
+<text x="48" y="820" font-size="30" fill="#241c14" font-weight="400" text-anchor="start">Red marbles:  3/8</text>
+<text x="48" y="880" font-size="30" fill="#241c14" font-weight="400" text-anchor="start">Green marbles:  5/8</text>
+<rect x="48" y="980" width="804" height="200" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="80" y="1060" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">The bar separates the two numbers.</text>
+<text x="80" y="1120" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">Top counts the parts we mean.</text>
+<text x="80" y="1180" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">Bottom counts the equal parts.</text>
+
+</svg>

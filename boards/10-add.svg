@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 920" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="920" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="34" fill="#9c4221" font-weight="700">Add and subtract like fractions</text>
+<text x="48" y="130" font-size="26">Add or subtract the numerators. Keep the denominator.</text>
+<circle cx="220" cy="340" r="120" fill="#f3d48a" stroke="#241c14" stroke-width="4"/>
+<g stroke="#241c14" stroke-width="3">
+<line x1="220" y1="220" x2="220" y2="460"/>
+<line x1="100" y1="340" x2="340" y2="340"/>
+<line x1="116" y1="280" x2="324" y2="400"/>
+<line x1="116" y1="400" x2="324" y2="280"/>
+</g>
+<path d="M220 340 L220 220 A120 120 0 0 1 324 280 Z" fill="#c45b4a"/>
+<path d="M220 340 L324 280 A120 120 0 0 1 340 340 Z" fill="#c45b4a"/>
+<path d="M220 340 L340 340 A120 120 0 0 1 324 400 Z" fill="#e09a3e"/>
+<path d="M220 340 L324 400 A120 120 0 0 1 220 460 Z" fill="#e09a3e"/>
+<text x="400" y="300" font-size="30">Misha 3/6</text>
+<text x="400" y="350" font-size="30">Namita 2/6</text>
+<text x="400" y="420" font-size="36" fill="#1f6b43" font-weight="700">Together 5/6</text>
+<text x="48" y="560" font-size="34">3/9 + 4/9 = 7/9</text>
+<text x="48" y="630" font-size="34">6/9 − 2/9 = 4/9</text>
+<rect x="48" y="690" width="804" height="180" rx="14" fill="#f8e8e4" stroke="#efc7c0"/>
+<text x="72" y="750" font-size="26">Ritu wrote 5/8 + 2/8 = 7/16.</text>
+<text x="72" y="810" font-size="28" fill="#1f6b43" font-weight="700">Correct sum: 7/8</text>
+
+</svg>

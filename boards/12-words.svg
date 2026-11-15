@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 940" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="940" fill="#f6f1e6"/>
+
+<text x="48" y="70" font-size="36" fill="#9c4221" font-weight="700">Word problems</text>
+<text x="48" y="140" font-size="28">U understand    P plan    D do    C check</text>
+<rect x="48" y="190" width="804" height="150" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="245" font-size="26">Ali 19/20, Sara 17/20</text>
+<text x="72" y="300" font-size="28" fill="#1f6b43">Ali attempted 2/20 more</text>
+<rect x="48" y="370" width="804" height="150" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="425" font-size="26">Nur 7/9 hour, Sia 4/9 hour</text>
+<text x="72" y="480" font-size="28" fill="#1f6b43">Nur longer by 3/9 hour</text>
+<rect x="48" y="550" width="804" height="150" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="605" font-size="26">Cloth 7/2 m, one piece 5/2 m</text>
+<text x="72" y="660" font-size="28" fill="#1f6b43">Other piece is 1 metre</text>
+<rect x="48" y="730" width="804" height="150" rx="14" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="72" y="785" font-size="26">Milk bought 3/5 L, used 1/5 L</text>
+<text x="72" y="840" font-size="28" fill="#1f6b43">2/5 litres left</text>
+
+</svg>

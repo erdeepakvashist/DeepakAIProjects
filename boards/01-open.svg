@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1280" font-family="Georgia, 'Times New Roman', serif">
+<rect width="900" height="1280" fill="#f6f1e6"/>
+
+<rect x="48" y="40" width="804" height="120" rx="16" fill="#9c4221"/>
+<text x="72" y="92" font-size="22" fill="#f6e2d6" font-weight="400" text-anchor="start">Chapter 6</text>
+<text x="72" y="134" font-size="48" fill="#fff8f3" font-weight="700" text-anchor="start">Fractions</text>
+<circle cx="250" cy="390" r="130" fill="#f3d48a" stroke="#241c14" stroke-width="4"/>
+<path d="M250 390 L250 260 A130 130 0 0 1 362 325 Z" fill="#c45b4a" stroke="#241c14" stroke-width="4"/>
+<text x="430" y="330" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">One slice of a pizza</text>
+<text x="430" y="370" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">is a fraction of the whole.</text>
+<rect x="48" y="580" width="804" height="620" rx="16" fill="#fffaf3" stroke="#e2d5c3"/>
+<text x="80" y="640" font-size="32" fill="#9c4221" font-weight="700" text-anchor="start">Today we learn</text>
+<text x="80" y="710" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">1   What a fraction means</text>
+<text x="80" y="770" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">2   Types of fractions</text>
+<text x="80" y="830" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">3   Equivalent fractions and simplest form</text>
+<text x="80" y="890" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">4   Improper fractions and mixed numbers</text>
+<text x="80" y="950" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">5   Comparing and ordering</text>
+<text x="80" y="1010" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">6   Add and subtract like fractions</text>
+<text x="80" y="1070" font-size="28" fill="#241c14" font-weight="400" text-anchor="start">7   Word problems</text>
+<text x="80" y="1150" font-size="28" fill="#1f6b43" font-weight="700" text-anchor="start">Pass mark on the test: 8 out of 10</text>
+
+</svg>
