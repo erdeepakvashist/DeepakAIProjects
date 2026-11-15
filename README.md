@@ -2,7 +2,9 @@
 
 Spoken class lessons.
 
-Open the class list: https://erdeepakvashist.github.io/DeepakAIProjects/
+Open mathTeacher: https://erdeepakvashist.github.io/DeepakAIProjects/mathTeacher/
+
+Fractions and Time are both on that page.
 
 - Chapter 6, Fractions: https://erdeepakvashist.github.io/DeepakAIProjects/fractions.html
 - Chapter 11, Time: https://erdeepakvashist.github.io/DeepakAIProjects/time.html

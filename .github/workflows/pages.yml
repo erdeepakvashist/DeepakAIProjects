@@ -25,8 +25,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Prepare site
         run: |
-          mkdir _site
+          mkdir -p _site/mathTeacher
           cp index.html fractions.html time.html README.md .nojekyll _site/
+          cp mathTeacher/index.html _site/mathTeacher/
           cp -r boards boards-time _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
